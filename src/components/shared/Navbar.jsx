@@ -14,8 +14,8 @@ export default function Navbar() {
   const { data, isPending } = authClient.useSession();
 
   const user = data?.user;
-  const session = data?.session;
-  console.log(user, session);
+  // const session = data?.session;
+  // console.log(user, session);
 
   const router = useRouter();
   const handleLogout = async () => {
