@@ -3,7 +3,6 @@
 import { authClient } from "@/lib/auth-client";
 import { handleGoogleLogin } from "@/lib/common";
 
-// import { handleGoogleLogin } from "@/lib/data";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 

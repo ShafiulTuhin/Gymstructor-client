@@ -9,6 +9,7 @@ import { useForm } from "react-hook-form";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { toast } from "react-toastify";
 import { Description, Label, Radio, RadioGroup } from "@heroui/react";
+import { handleGoogleLogin } from "@/lib/common";
 
 const Signup = () => {
   const [isPasswordShow, setIsPasswordShow] = useState(false);
@@ -26,15 +27,18 @@ const Signup = () => {
   const router = useRouter();
   const [role, setRole] = useState("user");
   const handleSubmitForm = async (data) => {
-    const { name, email, password } = data;
+    const { name, email, password, photo } = data;
 
     // const plan = role === "seeker" ? "seeker_free" : " recruiter_free";
+    const status = "active";
 
     const { data: res, error } = await authClient.signUp.email({
       name,
       email,
       password,
+      image: photo,
       role,
+      status,
       //   plan,
       callbackURL: "/",
     });
@@ -48,19 +52,7 @@ const Signup = () => {
       router.push("/");
     }
   };
-  //   const handleGoogleLogin = async () => {
-  //     try {
-  //       console.log("Button clicked");
 
-  //       const result = await authClient.signIn.social({
-  //         provider: "google",
-  //       });
-
-  //       console.log(result);
-  //     } catch (error) {
-  //       console.error(error);
-  //     }
-  //   };
   return (
     <div className="bg-gradient-to-r from-[#4EA618] via-[#7ED957] to-[#0B2E2F] py-20 px-5">
       <div className="bg-gradient-to-r from-[#0F3D3E] via-[#2E7D32] to-[#4EA618] lg:w-1/2 mx-auto  py-19 rounded-lg px-3 lg:px-0 ">
@@ -90,7 +82,7 @@ const Signup = () => {
               </p>
             )}
           </fieldset>
-          {/* <fieldset className="fieldset ">
+          <fieldset className="fieldset ">
             <legend className="fieldset-legend">Photo Url</legend>
             <input
               type="text"
@@ -105,7 +97,7 @@ const Signup = () => {
                 {errors.photo.message}
               </p>
             )}
-          </fieldset> */}
+          </fieldset>
           <fieldset className="fieldset ">
             <legend className="fieldset-legend">Email </legend>
             <input
@@ -195,7 +187,7 @@ const Signup = () => {
         <div className="text-center lg:w-1/2 mx-auto">
           {/* Continue with Google Button */}
           <button
-            // onClick={handleGoogleLogin}
+            onClick={handleGoogleLogin}
             className="flex items-center justify-center gap-3 w-full border-4 border-t-[#4EA618] border-r-gray-400 border-b-[#4EA618] border-l-gray-400 rounded-lg py-2 hover:bg-gray-300 transition cursor-pointer"
           >
             <Image

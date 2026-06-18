@@ -12,11 +12,14 @@ export const auth = betterAuth({
   user: {
     additionalFields: {
       role: {
-        defaut: "user",
+        default: "user",
       },
       //   plan: {
       //     default: "user",
       //   },
+      status: {
+        default: "active",
+      },
     },
   },
   socialProviders: {

@@ -7,6 +7,7 @@ import Logo from "@/assets/logo.png";
 import { authClient } from "@/lib/auth-client";
 import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
+import Avator from "../../assets/avatar.png";
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -35,17 +36,14 @@ export default function Navbar() {
     }
   };
 
-  const dashBoardLinks = {
-    path: "/dashboard",
-  };
-  // const dashBoardLinks =
-  //   user?.role === "seeker"
-  //     ? "/dashboard/seeker"
-  //     : user?.role === "recruiter"
-  //       ? "/dashboard/recruiter"
-  //       : user?.role === "admin"
-  //         ? "/dashboard/admin"
-  //         : "/auth/login";
+  const dashBoardLinks =
+    user?.role === "user"
+      ? "/dashboard/user"
+      : user?.role === "trainer"
+        ? "/dashboard/trainer"
+        : user?.role === "admin"
+          ? "/dashboard/admin"
+          : "/auth/login";
   return (
     <nav className="sticky bg-slate-100 top-0 z-50 ">
       <div className="">
@@ -98,7 +96,14 @@ export default function Navbar() {
               </div>
             ) : user ? (
               <div className="flex gap-4 items-center">
-                <div className="flex flex-col">
+                <Image
+                  src={user?.image || Avator}
+                  alt={user?.name}
+                  width={40}
+                  height={40}
+                  className="rounded-full"
+                />
+                <div>
                   <p className="bg-gradient-to-r from-[#192425] to-[#4EA618] bg-clip-text text-transparent font-bold ">
                     Welcome!
                   </p>
