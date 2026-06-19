@@ -58,13 +58,13 @@ const EditClass = ({ myClass }) => {
 
       <Modal.Backdrop>
         <Modal.Container placement="center">
-          <Modal.Dialog className="sm:max-w-2xl w-full max-h-[90vh] flex flex-col bg-gradient-to-b from-[#1B1B1B] via-gray-900 to-[#0b1220] text-white rounded-2xl shadow-2xl">
+          <Modal.Dialog className="sm:max-w-2xl w-full max-h-[90vh] flex flex-col bg-gradient-to-r from-[#4EA618] to-[#192425] text-white rounded-2xl shadow-2xl">
             <Modal.CloseTrigger />
 
             {/* HEADER */}
-            <Modal.Header className="border-b border-zinc-800 px-6 py-4">
+            <Modal.Header className="border-b border-gray-200 px-6 py-4">
               <Modal.Heading className="text-lg font-semibold">
-                Edit Class
+                Edit Class Information
               </Modal.Heading>
             </Modal.Header>
 
@@ -78,10 +78,6 @@ const EditClass = ({ myClass }) => {
                 >
                   {/* SECTION 1 */}
                   <Fieldset className="space-y-5">
-                    <legend className="text-sm font-semibold text-zinc-300 border-b border-zinc-800 pb-2">
-                      Edit Class Information
-                    </legend>
-
                     {/* GRID */}
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                       <TextField name="className" defaultValue={className}>
@@ -90,7 +86,7 @@ const EditClass = ({ myClass }) => {
                         </Label>
                         <Input
                           name="className"
-                          className="bg-gray-600 rounded-lg"
+                          className="bg-gray-200 rounded-lg"
                         />
                       </TextField>
 
@@ -100,7 +96,7 @@ const EditClass = ({ myClass }) => {
                         </Label>
 
                         <Select name="category" defaultValue={category}>
-                          <Select.Trigger className="bg-gray-600 w-full rounded-lg">
+                          <Select.Trigger className="bg-gray-200 w-full rounded-lg">
                             <Select.Value />
                             <Select.Indicator />
                           </Select.Trigger>
@@ -126,7 +122,7 @@ const EditClass = ({ myClass }) => {
                         </Label>
 
                         <Select name="difficulty" defaultValue={difficulty}>
-                          <Select.Trigger className="bg-gray-600 w-full rounded-lg">
+                          <Select.Trigger className="bg-gray-200 w-full rounded-lg">
                             <Select.Value />
                           </Select.Trigger>
 
@@ -154,7 +150,7 @@ const EditClass = ({ myClass }) => {
                         <Input
                           name="duration"
                           defaultValue={duration}
-                          className="bg-gray-600 rounded-lg"
+                          className="bg-gray-200 rounded-lg"
                           placeholder="e.g. 60 mins"
                         />
                       </div>
@@ -172,7 +168,7 @@ const EditClass = ({ myClass }) => {
                         name="description"
                         defaultValue={description}
                         rows={4}
-                        className="bg-gray-600 rounded-lg w-full"
+                        className="bg-gray-200 rounded-lg w-full"
                       />
                     </div>
 
@@ -184,7 +180,7 @@ const EditClass = ({ myClass }) => {
                       <input
                         name="price"
                         defaultValue={price}
-                        className="bg-gray-600 rounded-lg w-full p-2"
+                        className="bg-gray-200 rounded-lg w-full p-2"
                       />
                     </div>
                   </Fieldset>

@@ -21,6 +21,7 @@ const User = () => {
         <h2 className="text-white font-bold text-[20px]">{user?.name}</h2>
         <h2 className="text-[#131313] font-semibold">
           {/* {user?.role?.charAt(0).toUpperCase() + user?.role?.slice(1)} */}
+          {user?.role}
         </h2>
       </div>
     </div>
