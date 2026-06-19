@@ -20,3 +20,33 @@ export const getAuthorForums = async (authorId) => {
   const res = await fetch(`${baseUrl}/api/forums/author/${authorId}`);
   return res.json();
 };
+
+// Get Single forum details
+export const getSingleForum = async (id) => {
+  const res = await fetch(`${baseUrl}/api/forums/single/${id}`);
+  const myForum = await res.json();
+  return myForum;
+};
+// Update Forum
+export const updateForum = async (id, updatedForum) => {
+  const res = await fetch(`${baseUrl}/api/forums/${id}`, {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(updatedForum),
+  });
+
+  return res.json();
+};
+
+// Delete forum post:
+export const deleteForum = async (id) => {
+  const res = await fetch(`${baseUrl}/api/forums/${id}`, {
+    method: "DELETE",
+    headers: {
+      "content-type": "application/json",
+    },
+  });
+  return res.json;
+};

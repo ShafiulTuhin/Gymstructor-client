@@ -1,4 +1,4 @@
-import ClassDetails from "@/components/dashboard/trainer/ClassDetails";
+import ClassDetails from "@/components/dashboard/trainer/classes/ClassDetails";
 import { getSingleClass } from "@/lib/actions/classes";
 import React from "react";
 

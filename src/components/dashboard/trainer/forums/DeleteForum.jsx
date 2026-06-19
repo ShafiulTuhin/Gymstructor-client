@@ -1,17 +1,18 @@
 "use client";
 
+import { deleteForum } from "@/lib/actions/forums";
 import { AlertDialog, Button } from "@heroui/react";
 import { useRouter } from "next/navigation";
 import React from "react";
 import { FiTrash2 } from "react-icons/fi";
 import { toast } from "react-toastify";
 
-const DeleteClass = ({ myClass }) => {
+const DeleteForum = ({ myForum, user }) => {
   const router = useRouter();
 
-  const deleteClass = async () => {
+  const delForum = async () => {
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_URL}/api/classes/${myClass._id}`,
+      `${process.env.NEXT_PUBLIC_BASE_URL}/api/forums/${myForum._id}`,
       {
         method: "DELETE",
         headers: {
@@ -20,17 +21,20 @@ const DeleteClass = ({ myClass }) => {
       },
     );
     await res.json();
+    // await deleteForum(myForum._id);
 
-    toast.success(`${myClass.className} successfully deleted`);
+    toast.success(`${myForum.title} successfully deleted`);
 
     setTimeout(() => {
-      router.push("/dashboard/trainer/classes");
+      user?.role === "trainer"
+        ? router.push("/dashboard/trainer/forums")
+        : router.push("/dashboard/admin/forums");
     }, 1000);
   };
   return (
     <div>
       <AlertDialog>
-        <Button isIconOnly size="sm" variant="light" color="danger">
+        <Button className="flex items-center justify-center rounded-lg bg-red-500 p-2 text-white transition hover:bg-red-600">
           <FiTrash2 />
         </Button>
         <AlertDialog.Backdrop>
@@ -40,22 +44,22 @@ const DeleteClass = ({ myClass }) => {
               <AlertDialog.Header>
                 <AlertDialog.Icon status="danger" />
                 <AlertDialog.Heading className="text-white font-bold">
-                  Delete Class permanently?
+                  Delete Forum permanently?
                 </AlertDialog.Heading>
               </AlertDialog.Header>
               <AlertDialog.Body>
                 <p className="text-white">
-                  This will permanently delete class of
-                  <strong> {myClass.className}</strong> and all of its data.
-                  This action cannot be undone.
+                  This will permanently delete FOrum of
+                  <strong> {myForum.title}</strong> and all of its data. This
+                  action cannot be undone.
                 </p>
               </AlertDialog.Body>
               <AlertDialog.Footer>
                 <Button slot="close" variant="tertiary" className="text-black">
                   Cancel
                 </Button>
-                <Button onClick={deleteClass} slot="close" variant="danger">
-                  Delete Job
+                <Button onClick={delForum} slot="close" variant="danger">
+                  Delete Forum
                 </Button>
               </AlertDialog.Footer>
             </AlertDialog.Dialog>
@@ -66,4 +70,4 @@ const DeleteClass = ({ myClass }) => {
   );
 };
 
-export default DeleteClass;
+export default DeleteForum;

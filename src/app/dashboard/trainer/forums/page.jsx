@@ -8,7 +8,7 @@ const MyForumsPage = async () => {
   const myForums = await getAuthorForums(user?.id);
   return (
     <div>
-      <MyForumsPost forums={myForums} />
+      <MyForumsPost forums={myForums} user={user} />
     </div>
   );
 };

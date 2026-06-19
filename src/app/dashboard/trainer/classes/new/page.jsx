@@ -1,4 +1,4 @@
-import CreateClass from "@/components/dashboard/trainer/CreateClass";
+import CreateClass from "@/components/dashboard/trainer/classes/CreateClass";
 import { getUserSession } from "@/lib/core/session";
 import React from "react";
 

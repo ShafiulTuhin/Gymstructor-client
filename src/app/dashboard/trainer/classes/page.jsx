@@ -1,4 +1,4 @@
-import TrainerClassesTable from "@/components/dashboard/trainer/TrainerClassesTable";
+import TrainerClassesTable from "@/components/dashboard/trainer/classes/TrainerClassesTable";
 import { getTrainerClasses } from "@/lib/actions/classes";
 import { getUserSession } from "@/lib/core/session";
 import React from "react";

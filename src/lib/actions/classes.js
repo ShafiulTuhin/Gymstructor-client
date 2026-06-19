@@ -39,9 +39,9 @@ export const updateClass = async (id, updatedClass) => {
   return res.json();
 };
 
-// Delete Job:
+// Delete Class:
 export const deleteClass = async (id) => {
-  const res = await fetch(`${baseUrl}/jobs/${id}`, {
+  const res = await fetch(`${baseUrl}api/classes/${id}`, {
     method: "DELETE",
     headers: {
       "content-type": "application/json",

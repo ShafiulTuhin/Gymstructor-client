@@ -72,7 +72,7 @@ const EditClass = ({ myClass }) => {
             <Modal.Body className="px-6 py-5 overflow-y-auto flex-1 space-y-6">
               <Surface className="bg-transparent">
                 <Form
-                  id="edit-job-form"
+                  id="edit-class-form"
                   onSubmit={handleSubmit}
                   className="space-y-8"
                 >
@@ -206,7 +206,7 @@ const EditClass = ({ myClass }) => {
               <Button
                 type="submit"
                 form="edit-job-form"
-                className="bg-gradient-to-r from-violet-600 to-indigo-500 text-white rounded-lg px-5"
+                className="bg-gradient-to-r from-[#4EA618] to-[#192425] text-white rounded-lg px-5"
                 slot="close"
               >
                 Update Class

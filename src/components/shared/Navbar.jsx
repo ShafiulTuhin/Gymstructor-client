@@ -204,48 +204,48 @@ export default function Navbar() {
 
               <div className="my-4 h-px bg-white/10" />
 
-              {/* {isPending ? (
+              {isPending ? (
                 <div className="flex justify-center items-center py-1">
                   <Spinner size="sm" />
                 </div>
               ) : user ? (
                 <div className="flex justify-between items-center">
                   <div className="flex flex-col">
-                    <p className="bg-gradient-to-r from-violet-600 to-indigo-500 bg-clip-text text-transparent font-semibold text-sm">
+                    <p className="bg-gradient-to-r from-[#192425] to-[#4EA618] bg-clip-text text-transparent font-semibold text-sm">
                       Welcome!
                     </p>
 
-                    <p className="font-bold text-sm text-white">{user?.name}</p>
+                    <p className="font-bold text-sm bg-gradient-to-r from-[#4EA618] to-[#192425] bg-clip-text text-transparent">
+                      {user?.name}
+                    </p>
                   </div>
 
                   <Button
                     onClick={handleLogout}
                     className="
-                bg-gradient-to-r
-                from-violet-600
-                to-indigo-500"
+                bg-gradient-to-r from-[#4EA618] to-[#192425]"
                   >
                     Logout
                   </Button>
                 </div>
-              ) : ( */}
-              <div className="flex items-center justify-between">
-                <Link
-                  href="/auth/login"
-                  className="py-3 font-medium text-[#4EA618]"
-                >
-                  Sign In
-                </Link>
-                <Link href="/auth/signup">
-                  <Button
-                    radius="lg"
-                    className="bg-gradient-to-r from-[#4EA618] to-[#192425] text-white"
+              ) : (
+                <div className="flex items-center justify-between">
+                  <Link
+                    href="/auth/login"
+                    className="py-3 font-medium text-[#4EA618]"
                   >
-                    Signup
-                  </Button>
-                </Link>
-              </div>
-              {/* )} */}
+                    Sign In
+                  </Link>
+                  <Link href="/auth/signup">
+                    <Button
+                      radius="lg"
+                      className="bg-gradient-to-r from-[#4EA618] to-[#192425] text-white"
+                    >
+                      Signup
+                    </Button>
+                  </Link>
+                </div>
+              )}
             </div>
           </div>
         )}

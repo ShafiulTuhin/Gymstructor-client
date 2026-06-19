@@ -12,7 +12,7 @@ const DashboardLayout = async ({ children }) => {
       </aside>
 
       {/* Mobile Top + Main */}
-      <main className="flex-1 min-w-0 w-full min-h-screen pl-2">
+      <main className="flex-1 min-w-0 w-full min-h-screen pl-2 bg-gradient-to-r from-[#4EA618] to-[#0F3D3E]">
         {/* Mobile Sidebar Placeholder (optional) */}
         <div className="md:hidden mb-4">
           <Sidebar user={user} />
