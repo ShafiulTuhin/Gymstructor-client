@@ -101,7 +101,7 @@ const EditForum = ({ myForum, user }) => {
               <Modal.Body className="px-6 py-5 overflow-y-auto flex-1 space-y-6">
                 <Surface className="bg-transparent">
                   <Form
-                    id="edit-job-form"
+                    id="edit-forum-form"
                     onSubmit={handleSubmit}
                     className="space-y-8"
                   >
@@ -179,7 +179,7 @@ const EditForum = ({ myForum, user }) => {
 
                 <Button
                   type="submit"
-                  form="edit-job-form"
+                  form="edit-forum-form"
                   className="bg-gradient-to-r from-[#4EA618] to-[#192425] text-white rounded-lg px-5"
                   slot="close"
                 >

@@ -14,6 +14,11 @@ export const createClass = async (newClassData) => {
   const data = await res.json();
   return data;
 };
+// Get all classes
+export const getAllClasses = async () => {
+  const res = await fetch(`${baseUrl}/api/classes`);
+  return res.json();
+};
 
 // Get trainer all Classes
 export const getTrainerClasses = async (trainerId) => {

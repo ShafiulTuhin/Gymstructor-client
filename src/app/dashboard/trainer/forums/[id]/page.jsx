@@ -5,7 +5,6 @@ import React from "react";
 const ForumDetailsPage = async ({ params }) => {
   const { id } = await params;
   const forum = await getSingleForum(id);
-  console.log(forum);
 
   return (
     <div>

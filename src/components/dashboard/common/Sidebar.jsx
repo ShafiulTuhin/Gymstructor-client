@@ -14,6 +14,7 @@ import {
 import { Button, Drawer } from "@heroui/react";
 import User from "./User";
 import Link from "next/link";
+import { GrFavorite } from "react-icons/gr";
 
 const Sidebar = ({ user }) => {
   // console.log(user);
@@ -28,14 +29,19 @@ const Sidebar = ({ user }) => {
           },
           {
             icon: Magnifier,
-            href: "/dashboard/user/jobs",
-            label: "Jobs",
+            href: "/dashboard/user/classes",
+            label: "My Classes",
           },
 
           {
-            icon: Gear,
-            href: "/dashboard/user/settings",
-            label: "Settings",
+            icon: PlusShape,
+            href: "/dashboard/user/apply",
+            label: "Be a Trainer",
+          },
+          {
+            icon: GrFavorite,
+            href: "/dashboard/user/favorite",
+            label: "Favorite Classes",
           },
         ]
       : user?.role === "trainer"
@@ -125,10 +131,10 @@ const Sidebar = ({ user }) => {
         </Button>
         <Drawer.Backdrop>
           <Drawer.Content placement="left">
-            <Drawer.Dialog className="bg-gradient-to-b from-[#0b1220] via-gray-900 to-black">
+            <Drawer.Dialog className="bg-gradient-to-r from-[#4EA618] to-[#0F3D3E]">
               <Drawer.CloseTrigger />
               <Drawer.Header>
-                <Drawer.Heading>Navigation</Drawer.Heading>
+                {/* <Drawer.Heading>Navigation</Drawer.Heading> */}
               </Drawer.Header>
               <Drawer.Body>
                 {" "}

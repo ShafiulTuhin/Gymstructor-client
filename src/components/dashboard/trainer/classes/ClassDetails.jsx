@@ -1,21 +1,33 @@
-import React from "react";
+"use client";
+import React, { useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
+import { FiArrowLeft } from "react-icons/fi";
 
 const statusColor = {
-  pending: "bg-yellow-100 text-yellow-700 border-yellow-300",
-  approved: "bg-green-100 text-green-700 border-green-300",
-  rejected: "bg-red-100 text-red-700 border-red-300",
+  pending: "bg-yellow-500/20 text-yellow-300 border-yellow-500/30",
+  approved: "bg-green-500/20 text-green-300 border-green-500/30",
+  rejected: "bg-red-500/20 text-red-300 border-red-500/30",
 };
 
 const ClassDetails = ({ myClass }) => {
-  if (!myClass) return <p className="p-6">Loading...</p>;
+  if (!myClass) return <p className="p-6 text-white">Loading...</p>;
 
   return (
-    <div className="min-h-screen bg-gray-50 flex justify-center p-6">
-      <div className="w-full max-w-5xl bg-white rounded-xl shadow-lg overflow-hidden">
+    <div className="bg-[#071E22] px-5 py-10">
+      <div className="px-5 pt-6">
+        <Link
+          href="/classes"
+          className="inline-flex items-center gap-2 rounded-lg bg-[#173f40] px-4 py-2 text-sm text-white transition hover:bg-[#4EA618]"
+        >
+          <FiArrowLeft />
+          Back to Classes
+        </Link>
+      </div>
+      <div className="mx-auto max-w-6xl overflow-hidden rounded-2xl bg-[#0F3D3E] shadow-xl">
         <div className="grid grid-cols-1 md:grid-cols-2">
-          {/* LEFT SIDE - IMAGE */}
-          <div className="relative h-96 md:h-full">
+          {/* ================= IMAGE SIDE ================= */}
+          <div className="relative h-80 md:h-full">
             <Image
               src={myClass.image}
               alt={myClass.className}
@@ -23,12 +35,12 @@ const ClassDetails = ({ myClass }) => {
               className="object-cover"
             />
 
-            {/* STATUS BADGE */}
+            {/* STATUS */}
             <div className="absolute top-4 left-4">
               <span
-                className={`px-4 py-1 rounded-full text-sm font-semibold border ${
+                className={`rounded-full border px-4 py-1 text-sm font-semibold ${
                   statusColor[myClass.status?.toLowerCase()] ||
-                  "bg-gray-100 text-gray-600 border-gray-300"
+                  "bg-gray-500/20 text-gray-300 border-gray-500/30"
                 }`}
               >
                 {myClass.status}
@@ -36,63 +48,65 @@ const ClassDetails = ({ myClass }) => {
             </div>
           </div>
 
-          {/* RIGHT SIDE - DETAILS */}
-          <div className="p-6 flex flex-col gap-5">
+          {/* ================= CONTENT SIDE ================= */}
+          <div className="flex flex-col gap-6 p-6 text-white">
             {/* TITLE */}
-            <h1 className="text-3xl font-bold text-gray-800">
-              {myClass.className}
-            </h1>
+            <h1 className="text-3xl font-bold">{myClass.className}</h1>
 
             {/* INFO GRID */}
-            <div className="grid grid-cols-2 gap-3 text-sm">
-              <div className="bg-gray-100 p-3 rounded-lg">
-                <p className="text-gray-500">Category</p>
-                <p className="font-semibold">{myClass.category}</p>
+            <div className="grid grid-cols-2 gap-4 text-sm">
+              <div className="rounded-xl bg-[#173f40] p-4">
+                <p className="text-gray-300">Category</p>
+                <p className="font-semibold text-white">{myClass.category}</p>
               </div>
 
-              <div className="bg-gray-100 p-3 rounded-lg">
-                <p className="text-gray-500">Difficulty</p>
-                <p className="font-semibold capitalize">{myClass.difficulty}</p>
+              <div className="rounded-xl bg-[#173f40] p-4">
+                <p className="text-gray-300">Difficulty</p>
+                <p className="font-semibold capitalize text-white">
+                  {myClass.difficulty}
+                </p>
               </div>
 
-              <div className="bg-gray-100 p-3 rounded-lg">
-                <p className="text-gray-500">Duration</p>
-                <p className="font-semibold">{myClass.duration}</p>
+              <div className="rounded-xl bg-[#173f40] p-4">
+                <p className="text-gray-300">Duration</p>
+                <p className="font-semibold text-white">{myClass.duration}</p>
               </div>
 
-              <div className="bg-green-100 p-3 rounded-lg">
-                <p className="text-gray-500">Price</p>
-                <p className="font-bold text-green-700">${myClass.price}</p>
+              <div className="rounded-xl bg-[#173f40] p-4">
+                <p className="text-gray-300">Price</p>
+                <p className="font-bold text-[#4EA618]">${myClass.price}</p>
               </div>
             </div>
 
             {/* DESCRIPTION */}
             <div>
-              <h2 className="font-semibold text-gray-700 mb-1">Description</h2>
-              <p className="text-gray-600 leading-relaxed">
+              <h2 className="mb-2 text-lg font-semibold">Description</h2>
+              <p className="text-sm leading-6 text-gray-300">
                 {myClass.description}
               </p>
             </div>
 
             {/* SCHEDULE */}
-            <div>
-              <h2 className="font-semibold text-gray-700 mb-2">Schedule</h2>
+            {myClass.schedule?.length > 0 && (
+              <div>
+                <h2 className="mb-3 text-lg font-semibold">Schedule</h2>
 
-              <div className="space-y-2">
-                {myClass.schedule?.map((item, index) => (
-                  <div
-                    key={index}
-                    className="flex justify-between bg-gray-100 p-3 rounded-lg"
-                  >
-                    <span className="font-medium">{item.day}</span>
-                    <span className="text-gray-600">{item.time}</span>
-                  </div>
-                ))}
+                <div className="space-y-2">
+                  {myClass.schedule.map((item, index) => (
+                    <div
+                      key={index}
+                      className="flex justify-between rounded-lg bg-[#173f40] p-3 text-sm"
+                    >
+                      <span className="font-medium text-white">{item.day}</span>
+                      <span className="text-gray-300">{item.time}</span>
+                    </div>
+                  ))}
+                </div>
               </div>
-            </div>
+            )}
 
             {/* FOOT NOTE */}
-            <div className="text-xs text-gray-400 pt-2 border-t">
+            <div className="border-t border-gray-700 pt-3 text-xs text-gray-400">
               Trainer ID: {myClass.trainerId}
             </div>
           </div>

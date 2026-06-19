@@ -1,7 +1,7 @@
 "use client";
 
 import { updateClass } from "@/lib/actions/classes";
-import { Globe } from "@gravity-ui/icons";
+
 import {
   Button,
   Input,
@@ -17,26 +17,14 @@ import {
   Fieldset,
 } from "@heroui/react";
 import { useRouter } from "next/navigation";
-import React, { useEffect, useState } from "react";
+
 import { FiEdit } from "react-icons/fi";
 import { toast } from "react-toastify";
 
 const EditClass = ({ myClass }) => {
   const { _id, className, category, difficulty, duration, price, description } =
     myClass;
-  const [categories, setCategories] = useState([]);
-  console.log(categories);
-  useEffect(() => {
-    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
-    const fetchCategories = async () => {
-      const res = await fetch(`${baseUrl}/api/categories`);
-      const data = await res.json();
 
-      setCategories(data);
-    };
-
-    fetchCategories();
-  }, []);
   const router = useRouter();
 
   const handleSubmit = async (e) => {
@@ -91,23 +79,19 @@ const EditClass = ({ myClass }) => {
                       </TextField>
 
                       <div>
-                        <Label className="text-white text-sm mb-1 block">
-                          Category
-                        </Label>
-
-                        <Select name="category" defaultValue={category}>
-                          <Select.Trigger className="bg-gray-200 w-full rounded-lg">
+                        <Select name="category" defaultValue={category || ""}>
+                          <Label className="text-white">Category</Label>
+                          <Select.Trigger className="bg-gray-200">
                             <Select.Value />
-                            <Select.Indicator />
+                            <Select.Indicator className="text-gray-900" />
                           </Select.Trigger>
 
                           <Select.Popover>
                             <ListBox>
-                              {categories.map((cat) => (
-                                <ListBox.Item key={cat.name} id={cat.name}>
-                                  {cat.name}
-                                </ListBox.Item>
-                              ))}
+                              <ListBox.Item id="yoga">Yoga</ListBox.Item>
+                              <ListBox.Item id="gym">Gym</ListBox.Item>
+                              <ListBox.Item id="cardio">Cardio</ListBox.Item>
+                              {/* <ListBox.Item id="sales">Sales</ListBox.Item> */}
                             </ListBox>
                           </Select.Popover>
                         </Select>
@@ -201,7 +185,7 @@ const EditClass = ({ myClass }) => {
 
               <Button
                 type="submit"
-                form="edit-job-form"
+                form="edit-class-form"
                 className="bg-gradient-to-r from-[#4EA618] to-[#192425] text-white rounded-lg px-5"
                 slot="close"
               >

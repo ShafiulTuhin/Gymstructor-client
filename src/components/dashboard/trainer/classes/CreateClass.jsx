@@ -1,184 +1,3 @@
-// "use client";
-
-// import React, { useState } from "react";
-// import { useForm } from "react-hook-form";
-// import { toast } from "react-toastify";
-
-// import { createClass } from "@/lib/actions/classes";
-
-// const CreateClass = () => {
-//   const [imageUrl, setImageUrl] = useState("");
-
-//   const {
-//     register,
-//     handleSubmit,
-//     reset,
-//     formState: { errors },
-//   } = useForm();
-
-//   // 🔥 ImageBB upload
-//   const handleImageUpload = async (e) => {
-//     const file = e.target.files[0];
-
-//     const formData = new FormData();
-//     formData.append("image", file);
-
-//     const res = await fetch(
-//       `https://api.imgbb.com/1/upload?key=${process.env.NEXT_PUBLIC_IMAGE_API}`,
-//       {
-//         method: "POST",
-//         body: formData,
-//       },
-//     );
-
-//     const data = await res.json();
-//     setImageUrl(data.data.url);
-//   };
-
-//   // 🔥 Submit class
-//   const onSubmit = async (data) => {
-//     try {
-//       const payload = {
-//         className: data.className,
-//         image: imageUrl,
-//         category: data.category,
-//         difficulty: data.difficulty,
-//         duration: data.duration,
-//         schedule: JSON.parse(data.schedule), // simple approach
-//         price: Number(data.price),
-//         description: data.description,
-//         status: "Pending",
-//       };
-
-//       const res = await createClass(payload);
-
-//       toast.success("Class created successfully!");
-//       reset();
-//       setImageUrl("");
-//     } catch (error) {
-//       toast.error("Failed to create class");
-//     }
-//   };
-
-//   return (
-//     <div className="min-h-screen bg-[#0F3D3E] p-6 text-white">
-//       <div className="max-w-3xl mx-auto bg-white/10 p-6 rounded-xl border border-white/20">
-//         <h2 className="text-2xl font-bold mb-6">Create Class</h2>
-
-//         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-//           {/* Class Name */}
-//           <input
-//             {...register("className", {
-//               required: "Class name is required",
-//             })}
-//             placeholder="Class Name"
-//             className="w-full p-2 rounded bg-gray-800"
-//           />
-
-//           {errors.className && (
-//             <p className="text-red-400 text-sm">{errors.className.message}</p>
-//           )}
-
-//           {/* Image Upload */}
-//           <input
-//             type="file"
-//             onChange={handleImageUpload}
-//             className="w-full p-2 bg-gray-800 rounded"
-//           />
-
-//           {imageUrl && (
-//             <img src={imageUrl} className="w-full h-40 object-cover rounded" />
-//           )}
-
-//           {/* Category */}
-//           <input
-//             {...register("category", {
-//               required: "Category is required",
-//             })}
-//             placeholder="Category (Yoga, Gym, Cardio)"
-//             className="w-full p-2 rounded bg-gray-800"
-//           />
-
-//           {errors.category && (
-//             <p className="text-red-400 text-sm">{errors.category.message}</p>
-//           )}
-
-//           {/* Difficulty */}
-//           <select
-//             {...register("difficulty")}
-//             defaultValue="beginner"
-//             className="w-full p-2 rounded bg-gray-800"
-//           >
-//             <option value="beginner">Beginner</option>
-//             <option value="intermediate">Intermediate</option>
-//             <option value="advanced">Advanced</option>
-//           </select>
-
-//           {/* Duration */}
-//           <input
-//             {...register("duration", {
-//               required: "Duration is required",
-//             })}
-//             placeholder="Duration (e.g. 60 mins)"
-//             className="w-full p-2 rounded bg-gray-800"
-//           />
-
-//           {errors.duration && (
-//             <p className="text-red-400 text-sm">{errors.duration.message}</p>
-//           )}
-
-//           {/* Schedule */}
-//           {/* <textarea
-//             {...register("schedule", {
-//               required: "Schedule is required",
-//             })}
-//             placeholder='Schedule JSON: [{"day":"Mon","time":"10 AM"}]'
-//             className="w-full p-2 rounded bg-gray-800"
-//           />
-
-//           {errors.schedule && (
-//             <p className="text-red-400 text-sm">{errors.schedule.message}</p>
-//           )} */}
-
-//           {/* Price */}
-//           <input
-//             type="number"
-//             {...register("price", {
-//               required: "Price is required",
-//               min: {
-//                 value: 1,
-//                 message: "Price must be greater than 0",
-//               },
-//             })}
-//             placeholder="Price"
-//             className="w-full p-2 rounded bg-gray-800"
-//           />
-
-//           {errors.price && (
-//             <p className="text-red-400 text-sm">{errors.price.message}</p>
-//           )}
-
-//           {/* Description */}
-//           <textarea
-//             {...register("description")}
-//             placeholder="Description"
-//             className="w-full p-2 rounded bg-gray-800"
-//           />
-
-//           {/* Submit */}
-//           <button
-//             type="submit"
-//             className="w-full bg-[#4EA618] p-2 rounded font-bold"
-//           >
-//             Create Class
-//           </button>
-//         </form>
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default CreateClass;
 "use client";
 
 import React, { useState } from "react";
@@ -188,13 +7,10 @@ import { createClass } from "@/lib/actions/classes";
 import { useRouter } from "next/navigation";
 
 const CreateClass = ({ user }) => {
-  console.log(user);
-
   const [imageUrl, setImageUrl] = useState("");
   const [uploading, setUploading] = useState(false);
   const router = useRouter();
 
-  // ✅ Schedule state
   const [schedule, setSchedule] = useState([{ day: "Monday", time: "" }]);
 
   const {
@@ -208,43 +24,35 @@ const CreateClass = ({ user }) => {
     },
   });
 
-  // 🔥 Image upload (safe)
   const handleImageUpload = async (e) => {
-    try {
-      const file = e.target.files[0];
-      if (!file) return;
+    const file = e.target.files[0];
+    if (!file) return;
 
-      setUploading(true);
+    setUploading(true);
 
-      const formData = new FormData();
-      formData.append("image", file);
+    const formData = new FormData();
+    formData.append("image", file);
 
-      const res = await fetch(
-        `https://api.imgbb.com/1/upload?key=${process.env.NEXT_PUBLIC_IMAGE_API}`,
-        {
-          method: "POST",
-          body: formData,
-        },
-      );
+    const res = await fetch(
+      `https://api.imgbb.com/1/upload?key=${process.env.NEXT_PUBLIC_IMAGE_API}`,
+      {
+        method: "POST",
+        body: formData,
+      },
+    );
 
-      const data = await res.json();
+    const data = await res.json();
 
-      if (!data?.data?.url) {
-        toast.error("Image upload failed");
-        setUploading(false);
-        return;
-      }
-
-      setImageUrl(data.data.url);
+    if (!data?.data?.url) {
+      toast.error("Image upload failed");
       setUploading(false);
-    } catch (error) {
-      console.error(error);
-      toast.error("Image upload error");
-      setUploading(false);
+      return;
     }
+
+    setImageUrl(data.data.url);
+    setUploading(false);
   };
 
-  // 🔥 Submit class
   const onSubmit = async (data) => {
     try {
       if (!imageUrl) {
@@ -252,121 +60,107 @@ const CreateClass = ({ user }) => {
         return;
       }
 
-      const payload = {
+      await createClass({
         className: data.className,
         trainerId: user?.id,
         image: imageUrl,
         category: data.category,
         difficulty: data.difficulty,
         duration: data.duration,
-        schedule: schedule, // ✅ REAL schedule
+        schedule,
         price: Number(data.price),
         description: data.description,
-        // status: "pending",
-      };
-
-      const res = await createClass(payload);
-
-      console.log("Create class response:", res);
+      });
 
       toast.success("Class created successfully!");
-
       router.push("/dashboard/trainer/classes");
 
       reset();
       setImageUrl("");
       setSchedule([{ day: "Monday", time: "" }]);
-    } catch (error) {
-      console.error("Create class error:", error);
-      toast.error(error?.message || "Failed to create class");
+    } catch (err) {
+      toast.error("Failed to create class");
     }
   };
 
   return (
-    <div className="min-h-screen bg-[#0F3D3E] p-6 text-white">
-      <div className="max-w-3xl mx-auto bg-white/10 p-6 rounded-xl border border-white/20">
-        <h2 className="text-2xl font-bold mb-6">Create Class</h2>
+    <div className="min-h-screen bg-[#071E22] px-5 py-10 text-white">
+      <div className="mx-auto max-w-3xl rounded-2xl bg-[#0F3D3E] p-6 shadow-xl">
+        <h2 className="mb-6 text-2xl font-bold text-white">Create Class</h2>
 
-        <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-          {/* Class Name */}
+        <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
+          {/* CLASS NAME */}
           <input
-            {...register("className", {
-              required: "Class name is required",
-            })}
+            {...register("className", { required: true })}
             placeholder="Class Name"
-            className="w-full p-2 rounded bg-gray-800"
-          />
-          {errors.className && (
-            <p className="text-red-400 text-sm">{errors.className.message}</p>
-          )}
-
-          {/* Image Upload */}
-          <input
-            type="file"
-            onChange={handleImageUpload}
-            className="w-full p-2 bg-gray-800 rounded"
+            className="w-full rounded-lg bg-[#173f40] p-3 text-white outline-none"
           />
 
-          {uploading && (
-            <p className="text-yellow-300 text-sm">Uploading image...</p>
-          )}
+          {/* IMAGE UPLOAD */}
+          <div>
+            <label className="mb-2 block text-sm text-gray-300">
+              Upload Image
+            </label>
 
-          {imageUrl && (
-            <img
-              src={imageUrl}
-              className="w-full h-40 object-cover rounded"
-              alt="preview"
-            />
-          )}
+            <label className="flex cursor-pointer items-center justify-center rounded-lg border border-dashed border-gray-500 bg-[#173f40] p-4 text-center hover:border-[#4EA618]">
+              <input
+                type="file"
+                onChange={handleImageUpload}
+                className="hidden"
+              />
+              {uploading ? "Uploading..." : "Click to upload image"}
+            </label>
 
-          {/* Category */}
+            {imageUrl && (
+              <img
+                src={imageUrl}
+                className="mt-3 h-40 w-full rounded-lg object-cover"
+              />
+            )}
+          </div>
+
+          {/* CATEGORY + DIFFICULTY */}
+          <div className="grid grid-cols-2 gap-3">
+            <select
+              {...register("category")}
+              className="rounded-lg bg-[#173f40] p-3 text-white"
+            >
+              <option value="yoga">Yoga</option>
+              <option value="gym">Gym</option>
+              <option value="cardio">Cardio</option>
+            </select>
+
+            <select
+              {...register("difficulty")}
+              className="rounded-lg bg-[#173f40] p-3 text-white"
+            >
+              <option value="beginner">Beginner</option>
+              <option value="intermediate">Intermediate</option>
+              <option value="advanced">Advanced</option>
+            </select>
+          </div>
+
+          {/* DURATION */}
           <input
-            {...register("category", {
-              required: "Category is required",
-            })}
-            placeholder="Category (Yoga, Gym, Cardio)"
-            className="w-full p-2 rounded bg-gray-800"
-          />
-          {errors.category && (
-            <p className="text-red-400 text-sm">{errors.category.message}</p>
-          )}
-
-          {/* Difficulty */}
-          <select
-            {...register("difficulty")}
-            className="w-full p-2 rounded bg-gray-800"
-          >
-            <option value="beginner">Beginner</option>
-            <option value="intermediate">Intermediate</option>
-            <option value="advanced">Advanced</option>
-          </select>
-
-          {/* Duration */}
-          <input
-            {...register("duration", {
-              required: "Duration is required",
-            })}
+            {...register("duration", { required: true })}
             placeholder="Duration (e.g. 60 mins)"
-            className="w-full p-2 rounded bg-gray-800"
+            className="w-full rounded-lg bg-[#173f40] p-3 text-white outline-none"
           />
-          {errors.duration && (
-            <p className="text-red-400 text-sm">{errors.duration.message}</p>
-          )}
 
-          {/* ================= SCHEDULE ================= */}
-          <div className="space-y-2">
-            <label className="text-sm font-semibold">Class Schedule</label>
+          {/* SCHEDULE */}
+          <div>
+            <p className="mb-2 text-sm text-gray-300">Schedule</p>
 
-            {schedule.map((item, index) => (
-              <div key={index} className="flex gap-2">
+            {schedule.map((item, i) => (
+              <div key={i} className="mb-2 flex gap-2">
                 <select
                   value={item.day}
                   onChange={(e) => {
-                    const updated = [...schedule];
-                    updated[index].day = e.target.value;
-                    setSchedule(updated);
+                    const copy = [...schedule];
+                    copy[i].day = e.target.value;
+                    setSchedule(copy);
                   }}
-                  className="p-2 rounded bg-gray-800 w-1/2"
+                  className="w-1/2 rounded-lg bg-[#173f40] p-2"
                 >
                   <option>Monday</option>
                   <option>Tuesday</option>
@@ -378,15 +172,14 @@ const CreateClass = ({ user }) => {
                 </select>
 
                 <input
-                  type="text"
-                  placeholder="Time (e.g. 10 AM)"
                   value={item.time}
                   onChange={(e) => {
-                    const updated = [...schedule];
-                    updated[index].time = e.target.value;
-                    setSchedule(updated);
+                    const copy = [...schedule];
+                    copy[i].time = e.target.value;
+                    setSchedule(copy);
                   }}
-                  className="p-2 rounded bg-gray-800 w-1/2"
+                  placeholder="Time"
+                  className="w-1/2 rounded-lg bg-[#173f40] p-2"
                 />
               </div>
             ))}
@@ -396,46 +189,31 @@ const CreateClass = ({ user }) => {
               onClick={() =>
                 setSchedule([...schedule, { day: "Monday", time: "" }])
               }
-              className="text-sm text-green-400"
+              className="text-sm text-[#4EA618]"
             >
-              + Add More
+              + Add Schedule
             </button>
           </div>
 
-          {/* Price */}
+          {/* PRICE */}
           <input
             type="number"
-            {...register("price", {
-              required: "Price is required",
-              min: {
-                value: 1,
-                message: "Price must be greater than 0",
-              },
-            })}
+            {...register("price", { required: true })}
             placeholder="Price"
-            className="w-full p-2 rounded bg-gray-800"
+            className="w-full rounded-lg bg-[#173f40] p-3 text-white outline-none"
           />
-          {errors.price && (
-            <p className="text-red-400 text-sm">{errors.price.message}</p>
-          )}
 
-          {/* Description */}
+          {/* DESCRIPTION */}
           <textarea
-            {...register("description", {
-              required: "Description is required",
-            })}
+            {...register("description", { required: true })}
             placeholder="Description"
-            className="w-full p-2 rounded bg-gray-800"
+            className="w-full rounded-lg bg-[#173f40] p-3 text-white outline-none"
           />
-          {errors.description && (
-            <p className="text-red-400 text-sm">{errors.description.message}</p>
-          )}
 
-          {/* Submit */}
+          {/* SUBMIT */}
           <button
-            type="submit"
-            className="w-full bg-[#4EA618] p-2 rounded font-bold disabled:opacity-50"
             disabled={uploading}
+            className="w-full rounded-lg bg-[#4EA618] py-3 font-bold text-white transition hover:bg-green-700 disabled:opacity-50"
           >
             {uploading ? "Uploading..." : "Create Class"}
           </button>
