@@ -1,67 +1,3 @@
-// "use client";
-
-// import { Button } from "@heroui/react";
-// import { useState } from "react";
-// import { toast } from "react-toastify";
-
-// const LikeUnlike = ({ user, forum }) => {
-//   const [voted, setVoted] = useState(false);
-//   console.log(user);
-
-//   const handleVote = async (type) => {
-//     try {
-//       const res = await fetch(
-//         `${process.env.NEXT_PUBLIC_BASE_URL}/api/forums/vote`,
-//         {
-//           method: "POST",
-//           headers: {
-//             "Content-Type": "application/json",
-//           },
-//           body: JSON.stringify({
-//             userId: user?.id,
-//             forumId: forum?._id,
-//             vote: type,
-//           }),
-//         },
-//       );
-
-//       const data = await res.json();
-
-//       if (!res.ok) {
-//         toast.error(data.message || "Already voted");
-//         return;
-//       }
-
-//       setVoted(true);
-//       toast.success(`You voted ${type}`);
-//     } catch (error) {
-//       console.error("VOTE API ERROR:", error);
-//       res.status(500).send({ message: error.message });
-//     }
-//   };
-
-//   return (
-//     <div className="flex gap-4">
-//       <Button
-//         onClick={() => handleVote("like")}
-//         disabled={voted}
-//         className="bg-[#4EA618] text-white px-6"
-//       >
-//         Like
-//       </Button>
-
-//       <Button
-//         onClick={() => handleVote("dislike")}
-//         disabled={voted}
-//         className="bg-red-500 text-white px-6"
-//       >
-//         Dislike
-//       </Button>
-//     </div>
-//   );
-// };
-
-// export default LikeUnlike;
 "use client";
 
 import { Button } from "@heroui/react";
@@ -117,11 +53,11 @@ export default function LikeUnlike({ user, forum }) {
   };
 
   return (
-    <div className="flex gap-4">
+    <div className="flex lg:mt-0 mt-5 gap-4">
       <Button
         onClick={() => handleVote("like")}
         disabled={voted || loading}
-        className={`bg-[#4EA618] text-white px-6 ${
+        className={`bg-[#4EA618] text-white px-6 rounded-lg ${
           voted ? "opacity-40 cursor-not-allowed" : ""
         }`}
       >
@@ -131,7 +67,7 @@ export default function LikeUnlike({ user, forum }) {
       <Button
         onClick={() => handleVote("dislike")}
         disabled={voted || loading}
-        className={`bg-red-500 text-white px-6 ${
+        className={`bg-red-500 text-white px-6 rounded-lg ${
           voted ? "opacity-40 cursor-not-allowed" : ""
         }`}
       >

@@ -5,7 +5,7 @@ const AllForums = ({ forum }) => {
   const { _id, title, image, authorName, description } = forum;
 
   return (
-    <div className="h-full flex flex-col rounded-lg  border border-gray-700 overflow-hidden hover:border-[#4EA618] transition">
+    <div className="h-full flex flex-col rounded-lg bg-[#0F3D3E] border border-gray-700 overflow-hidden hover:border-[#4EA618] transition">
       {/* SMALLER IMAGE FOR 4 GRID */}
       <div className="h-[300px] w-full overflow-hidden">
         <Image
