@@ -186,7 +186,6 @@ import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import { createClass } from "@/lib/actions/classes";
 import { useRouter } from "next/navigation";
-import { authClient } from "@/lib/auth-client";
 
 const CreateClass = ({ user }) => {
   console.log(user);
