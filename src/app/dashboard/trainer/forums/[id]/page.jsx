@@ -1,4 +1,4 @@
-import ForumDetails from "@/components/dashboard/trainer/forums/ForumDetails";
+import ForumDetails from "@/components/forums/ForumDetails";
 import { getSingleForum } from "@/lib/actions/forums";
 import React from "react";
 

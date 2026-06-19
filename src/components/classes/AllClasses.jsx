@@ -3,7 +3,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import { FiEye, FiSearch } from "react-icons/fi";
-import AllClassesReused from "./AllClassesReused";
 
 const AllClasses = ({ classes }) => {
   const [search, setSearch] = useState("");
@@ -137,7 +136,6 @@ const AllClasses = ({ classes }) => {
             </div>
           )}
         </section>
-        {/* <AllClassesReused filteredClasses={filteredClasses}/> */}
       </div>
     </div>
   );

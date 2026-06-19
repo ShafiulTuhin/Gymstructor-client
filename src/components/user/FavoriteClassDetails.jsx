@@ -3,11 +3,11 @@ import Link from "next/link";
 import React from "react";
 import { FiEye } from "react-icons/fi";
 
-const AllClassesReused = ({ filteredClasses }) => {
+const FavoriteClassDetails = ({ classes }) => {
   return (
     <section className="lg:col-span-3">
       <div className="grid gap-6 sm:grid-cols-2 xl:grid-cols-3">
-        {filteredClasses?.map((item) => (
+        {classes?.map((item) => (
           <div
             key={item._id}
             className="flex h-full flex-col overflow-hidden rounded-2xl bg-[#0F3D3E] shadow-lg transition duration-300 hover:-translate-y-1 hover:shadow-xl"
@@ -64,4 +64,4 @@ const AllClassesReused = ({ filteredClasses }) => {
   );
 };
 
-export default AllClassesReused;
+export default FavoriteClassDetails;

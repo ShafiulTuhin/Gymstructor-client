@@ -24,6 +24,7 @@ const ClassDetails = ({ myClass }) => {
           Back to Classes
         </Link>
       </div>
+
       <div className="mx-auto max-w-6xl overflow-hidden rounded-2xl bg-[#0F3D3E] shadow-xl">
         <div className="grid grid-cols-1 md:grid-cols-2">
           {/* ================= IMAGE SIDE ================= */}

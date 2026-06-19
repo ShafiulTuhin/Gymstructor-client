@@ -1,4 +1,4 @@
-import MyForumsPost from "@/components/dashboard/trainer/forums/MyForumsPost";
+import MyForumsPost from "@/components/forums/MyForumsPost";
 import { getAuthorForums } from "@/lib/actions/forums";
 import { getUserSession } from "@/lib/core/session";
 import React from "react";

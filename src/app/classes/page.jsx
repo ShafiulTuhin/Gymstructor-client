@@ -1,4 +1,4 @@
-import AllClasses from "@/components/dashboard/common/AllClasses";
+import AllClasses from "@/components/classes/AllClasses";
 import { getAllClasses } from "@/lib/actions/classes";
 import React from "react";
 

@@ -1,4 +1,4 @@
-import CreateForum from "@/components/dashboard/trainer/forums/CreateForum";
+import CreateForum from "@/components/forums/CreateForum";
 import { getUserSession } from "@/lib/core/session";
 import React from "react";
 

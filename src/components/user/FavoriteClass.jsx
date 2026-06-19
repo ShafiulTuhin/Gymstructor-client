@@ -1,10 +1,6 @@
 "use client";
 
-import Image from "next/image";
-import Link from "next/link";
-import { FiEye, FiTrash2 } from "react-icons/fi";
-import ClassDetails from "../dashboard/trainer/classes/ClassDetails";
-import AllClasses from "../dashboard/common/AllClasses";
+import FavoriteClassDetails from "./FavoriteClassDetails";
 
 const FavoriteClass = ({ favClasses = [] }) => {
   console.log(favClasses);
@@ -19,7 +15,7 @@ const FavoriteClass = ({ favClasses = [] }) => {
 
   return (
     <div className="min-h-screen bg-[#071E22] px-5 py-10">
-      <AllClasses classes={favClasses} />
+      <FavoriteClassDetails classes={favClasses} />
     </div>
   );
 };

@@ -13,12 +13,10 @@ const ForumDetails = ({ forum }) => {
           {/* Featured Image */}
           <div className="relative">
             <Image
-              src={image}
-              alt={title}
+              src={image || "/placeholder.png"}
+              alt={title || "forum image"}
               width={450}
               height={260}
-              radius="none"
-              removeWrapper
               className="w-full h-[260px] md:h-[450px] object-cover"
             />
 

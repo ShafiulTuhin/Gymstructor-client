@@ -54,6 +54,7 @@
 
 import { Button } from "@heroui/react";
 import React, { useEffect, useState } from "react";
+import { toast } from "react-toastify";
 
 const AddToFavorite = ({ user, myClass }) => {
   const [isFavorite, setIsFavorite] = useState(false);
@@ -98,6 +99,7 @@ const AddToFavorite = ({ user, myClass }) => {
 
       const data = await res.json();
       setIsFavorite(data.favorite);
+      toast.success("Successfully added to your favorites!");
     } catch (err) {
       console.log(err);
     } finally {

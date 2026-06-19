@@ -1,0 +1,142 @@
+// "use client";
+
+// import { Button } from "@heroui/react";
+// import { useState } from "react";
+// import { toast } from "react-toastify";
+
+// const LikeUnlike = ({ user, forum }) => {
+//   const [voted, setVoted] = useState(false);
+//   console.log(user);
+
+//   const handleVote = async (type) => {
+//     try {
+//       const res = await fetch(
+//         `${process.env.NEXT_PUBLIC_BASE_URL}/api/forums/vote`,
+//         {
+//           method: "POST",
+//           headers: {
+//             "Content-Type": "application/json",
+//           },
+//           body: JSON.stringify({
+//             userId: user?.id,
+//             forumId: forum?._id,
+//             vote: type,
+//           }),
+//         },
+//       );
+
+//       const data = await res.json();
+
+//       if (!res.ok) {
+//         toast.error(data.message || "Already voted");
+//         return;
+//       }
+
+//       setVoted(true);
+//       toast.success(`You voted ${type}`);
+//     } catch (error) {
+//       console.error("VOTE API ERROR:", error);
+//       res.status(500).send({ message: error.message });
+//     }
+//   };
+
+//   return (
+//     <div className="flex gap-4">
+//       <Button
+//         onClick={() => handleVote("like")}
+//         disabled={voted}
+//         className="bg-[#4EA618] text-white px-6"
+//       >
+//         Like
+//       </Button>
+
+//       <Button
+//         onClick={() => handleVote("dislike")}
+//         disabled={voted}
+//         className="bg-red-500 text-white px-6"
+//       >
+//         Dislike
+//       </Button>
+//     </div>
+//   );
+// };
+
+// export default LikeUnlike;
+"use client";
+
+import { Button } from "@heroui/react";
+import { useEffect, useState } from "react";
+import { toast } from "react-toastify";
+
+export default function LikeUnlike({ user, forum }) {
+  const key = `${user?.id}-${forum?._id}`;
+
+  const [voted, setVoted] = useState(false);
+  const [loading, setLoading] = useState(false);
+
+  // restore state after refresh (frontend only fix)
+  useEffect(() => {
+    const saved = localStorage.getItem(key);
+    if (saved === "true") setVoted(true);
+  }, [key]);
+
+  const handleVote = async (type) => {
+    try {
+      setLoading(true);
+
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_BASE_URL}/api/forums/vote`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            userId: user.id, // ✅ FIXED
+            forumId: forum._id,
+            vote: type,
+          }),
+        },
+      );
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        toast.error(data.message || "Already voted");
+        return;
+      }
+
+      setVoted(true);
+      localStorage.setItem(key, "true");
+
+      toast.success("You have completed your vote");
+    } catch (err) {
+      console.log(err);
+      toast.error("Something went wrong");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <div className="flex gap-4">
+      <Button
+        onClick={() => handleVote("like")}
+        disabled={voted || loading}
+        className={`bg-[#4EA618] text-white px-6 ${
+          voted ? "opacity-40 cursor-not-allowed" : ""
+        }`}
+      >
+        Like
+      </Button>
+
+      <Button
+        onClick={() => handleVote("dislike")}
+        disabled={voted || loading}
+        className={`bg-red-500 text-white px-6 ${
+          voted ? "opacity-40 cursor-not-allowed" : ""
+        }`}
+      >
+        Dislike
+      </Button>
+    </div>
+  );
+}

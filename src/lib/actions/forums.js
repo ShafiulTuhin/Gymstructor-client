@@ -15,7 +15,13 @@ export const createForum = async (newFOrumData) => {
   return data;
 };
 
-// Get author all forums
+// Get all classes
+export const getAllForums = async () => {
+  const res = await fetch(`${baseUrl}/api/forums`);
+  return res.json();
+};
+
+// Get author's all forums
 export const getAuthorForums = async (authorId) => {
   const res = await fetch(`${baseUrl}/api/forums/author/${authorId}`);
   return res.json();
