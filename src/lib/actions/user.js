@@ -13,3 +13,9 @@ export const createNewTrainerApplication = async (newTrainerData) => {
   const data = await res.json();
   return data;
 };
+
+export const getNewTrainerApplication = async (applicantId) => {
+  const res = await fetch(`${baseUrl}/api/apply-for-trainer/${applicantId}`);
+  const data = await res.json();
+  return data;
+};

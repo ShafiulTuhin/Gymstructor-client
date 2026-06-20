@@ -6,7 +6,7 @@ const Profile = ({ user }) => {
   const { name, email, image, role, createdAt, updatedAt } = user;
 
   return (
-    <div className="min-h-screen bg-[#071E22] p-6 text-white">
+    <div className=" p-6 text-white">
       <div className="mx-auto max-w-5xl">
         {/* PROFILE CARD */}
         <div className="mx-auto w-full max-w-md rounded-2xl border border-[#173f40] bg-[#0F3D3E] p-6 shadow-xl">

@@ -308,6 +308,7 @@ const CreateClass = ({ user }) => {
       await createClass({
         className: data.className,
         trainerId: user?.id,
+        trainerName: user?.name,
         image: imageUrl,
         category: data.category,
         difficulty: data.difficulty,

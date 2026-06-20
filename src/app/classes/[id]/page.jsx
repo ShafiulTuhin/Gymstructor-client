@@ -3,6 +3,7 @@ import AddToFavorite from "@/components/user/AddToFavorite";
 import { getSingleClass } from "@/lib/actions/classes";
 import { getUserSession } from "@/lib/core/session";
 import { Button } from "@heroui/react";
+import Link from "next/link";
 import React from "react";
 import { FaHeart } from "react-icons/fa";
 
@@ -19,9 +20,12 @@ const DetailsClassPage = async ({ params }) => {
       <div className="max-w-6xl mx-auto flex justify-center">
         <div className="flex gap-4">
           {/* BOOK BUTTON */}
-          <Button className="bg-[#4EA618] text-white px-10 py-5 rounded-lg font-semibold hover:bg-green-600 transition">
-            Book Class
-          </Button>
+          <Link href={`/payment/${myClass._id}`}>
+            {" "}
+            <Button className="bg-[#4EA618] text-white px-10 py-5 rounded-lg font-semibold hover:bg-green-600 transition">
+              Book Class
+            </Button>
+          </Link>
 
           {/* FAVORITE BUTTON */}
           <AddToFavorite user={user} myClass={myClass} />
