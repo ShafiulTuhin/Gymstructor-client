@@ -30,7 +30,7 @@ const Sidebar = ({ user }) => {
           {
             icon: Magnifier,
             href: "/dashboard/user/classes",
-            label: "My Classes",
+            label: "My Bookings",
           },
 
           {

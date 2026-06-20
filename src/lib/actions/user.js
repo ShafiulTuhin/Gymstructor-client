@@ -19,3 +19,30 @@ export const getNewTrainerApplication = async (applicantId) => {
   const data = await res.json();
   return data;
 };
+
+export const createPaymentAndBooking = async ({
+  sessionId,
+  userId,
+  classId,
+}) => {
+  const res = await fetch(`${baseUrl}/api/payment`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      sessionId,
+      userId,
+      classId,
+    }),
+  });
+
+  const data = await res.json();
+  return data;
+};
+
+export const getBookingAndPaymentDetails = async (userId) => {
+  const res = await fetch(`${baseUrl}/api/payment/${userId}`);
+  const data = await res.json();
+  return data;
+};
