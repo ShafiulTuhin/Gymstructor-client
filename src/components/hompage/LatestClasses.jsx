@@ -8,9 +8,9 @@ const LatestClasses = async () => {
 
   return (
     <div>
-      <section className=" bg-gradient-to-r from-[#0F3D3E] to-[#071E22]">
+      <section className="bg-gradient-to-r from-[#0F3D3E] to-[#071E22]">
         <div className="container mx-auto px-4 py-16">
-          <h2 className="text-3xl font-bold text-white mb-8">
+          <h2 className="text-4xl md:text-5xl font-extrabold text-gray-300 text-center mb-5 py-8">
             🔥 Top 3 Latest Classes
           </h2>
 
@@ -18,7 +18,7 @@ const LatestClasses = async () => {
             {classes.map((cls) => (
               <div
                 key={cls.id}
-                className="bg-gradient-to-r from-[#071E22] to-[#0F3D3E] border border-white/10 rounded-xl p-5 text-white hover:scale-[1.02] transition"
+                className="bg-gradient-to-r from-[#071E22] to-[#0F3D3E] border border-white/10 rounded-xl space-y-6 p-5 text-white hover:scale-[1.02] transition"
               >
                 {/* Image */}
                 <div className="relative h-52 w-full">
