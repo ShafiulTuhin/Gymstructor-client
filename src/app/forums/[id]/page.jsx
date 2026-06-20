@@ -3,12 +3,16 @@ import ForumDetails from "@/components/forums/ForumDetails";
 import LikeUnLike from "@/components/forumsAll/LikeUnLike";
 import { getSingleForum } from "@/lib/actions/forums";
 import { getUserSession } from "@/lib/core/session";
+import Error from "./error";
 
 const ForumDetailsPage = async ({ params }) => {
   const { id } = await params;
 
   const forum = await getSingleForum(id);
   const user = await getUserSession();
+  if (forum.error) {
+    return <Error error={forum.error} />;
+  }
 
   return (
     <div className="min-h-screen bg-[#071E22] px-5 py-10">

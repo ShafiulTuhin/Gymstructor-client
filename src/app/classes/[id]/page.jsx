@@ -6,6 +6,7 @@ import { getUserSession } from "@/lib/core/session";
 import { Button } from "@heroui/react";
 import Link from "next/link";
 import React from "react";
+import Error from "./error";
 
 const DetailsClassPage = async ({ params }) => {
   const { id } = await params;
@@ -17,6 +18,9 @@ const DetailsClassPage = async ({ params }) => {
     (b) => b.userId === user?.id && b.classId === myClass._id,
   );
 
+  if (myClass.error) {
+    return <Error error={myClass.error} />;
+  }
   return (
     <div className="min-h-screen bg-[#071E22] px-5 py-10">
       <ClassDetails myClass={myClass} />

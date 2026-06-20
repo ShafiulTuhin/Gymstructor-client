@@ -3,6 +3,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import { FiEye, FiSearch } from "react-icons/fi";
+import Lottie from "lottie-react";
+import gymAnimation from "@/assets/gym-workout.json";
 
 const AllClasses = ({ classes }) => {
   const [search, setSearch] = useState("");
@@ -96,6 +98,55 @@ const AllClasses = ({ classes }) => {
                 {category === "all" ? "All Classes" : category}
               </button>
             ))}
+          </div>
+          {/* ================= Gym Feature Card ================= */}
+          <div className="mt-12 rounded-2xl border border-[#173f40] bg-gradient-to-b from-[#0F3D3E] to-[#071E22]  p-5 shadow-lg">
+            <h3 className="text-white text-lg font-semibold mb-3">
+              💪 Daily Fitness Tip
+            </h3>
+
+            <p className="text-gray-300 text-sm leading-6">
+              “Consistency beats intensity. Train a little every day and your
+              body will transform over time.”
+            </p>
+
+            <div className="mt-4 h-2 w-full rounded-full bg-[#173f40] overflow-hidden">
+              <div className="h-full w-2/3 bg-[#4EA618] rounded-full animate-pulse"></div>
+            </div>
+
+            <p className="mt-3 text-xs text-gray-400">
+              Weekly progress motivation
+            </p>
+          </div>
+          <div className="mt-8 rounded-2xl border border-[#173f40] bg-gradient-to-b from-[#0F3D3E] to-[#071E22] p-5 shadow-lg overflow-hidden">
+            <h3 className="text-white text-lg font-semibold mb-2">
+              🏋️ Training Mode
+            </h3>
+
+            <p className="text-gray-300 text-sm mb-4">
+              Stay consistent. Every rep makes you stronger.
+            </p>
+
+            {/* ANIMATION */}
+            <div className="flex justify-center items-center h-32 mt-5">
+              <div className="relative w-20 h-20">
+                {/* body */}
+                <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-6 h-12 bg-[#4EA618] rounded-md animate-bounce"></div>
+
+                {/* left weight */}
+                <div className="absolute top-2 left-0 w-4 h-4 bg-[#00C2FF] rounded-full animate-pulse"></div>
+
+                {/* right weight */}
+                <div className="absolute top-2 right-0 w-4 h-4 bg-[#00C2FF] rounded-full animate-pulse"></div>
+
+                {/* bar */}
+                <div className="absolute top-4 left-1/2 -translate-x-1/2 w-16 h-1 bg-gray-400"></div>
+              </div>
+            </div>
+
+            <p className="text-center text-xs text-gray-400 mt-2">
+              Keep pushing 💪
+            </p>
           </div>
         </aside>
 
