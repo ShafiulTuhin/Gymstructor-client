@@ -1,3 +1,27 @@
+// import Profile from "@/components/dashboard/Profile";
+// import ApplicationStatus from "@/components/user/ApplicationStatus";
+// import Statistics from "@/components/user/Statistics";
+// import { getMyFavoriteClass } from "@/lib/actions/favorite";
+// import { getNewTrainerApplication } from "@/lib/actions/user";
+// import { getUserSession } from "@/lib/core/session";
+
+// const UserHomePage = async () => {
+//   const user = await getUserSession();
+//   const favClass = await getMyFavoriteClass(user?.id);
+//   const myApplication = await getNewTrainerApplication(user?.id);
+
+//   return (
+//     <div className="bg-[#071E22] min-h-screen">
+//       <Profile user={user} />
+//       <div className="lg:flex justify-between items-center max-w-5xl mx-auto lg:px-0 px-4">
+//         <Statistics myClass={favClass} />
+//         <ApplicationStatus myApplication={myApplication} />
+//       </div>
+//     </div>
+//   );
+// };
+
+// export default UserHomePage;
 import Profile from "@/components/dashboard/Profile";
 import ApplicationStatus from "@/components/user/ApplicationStatus";
 import Statistics from "@/components/user/Statistics";
@@ -6,16 +30,51 @@ import { getNewTrainerApplication } from "@/lib/actions/user";
 import { getUserSession } from "@/lib/core/session";
 
 const UserHomePage = async () => {
-  const user = await getUserSession();
-  const favClass = await getMyFavoriteClass(user?.id);
-  const myApplication = await getNewTrainerApplication(user?.id);
-  // console.log(myApplication || "Not yet");
+  let user = null;
+  let favClass = [];
+  let myApplication = null;
+
+  // 1. Check Session
+  try {
+    user = await getUserSession();
+    console.log("DEBUG: User session successfully loaded", user?.id);
+  } catch (err) {
+    console.error("💥 CRASH inside getUserSession():", err.message);
+  }
+
+  // 2. Check Favorite Class
+  if (user?.id) {
+    try {
+      favClass = await getMyFavoriteClass(user.id);
+      console.log("DEBUG: Favorite classes loaded", favClass);
+    } catch (err) {
+      console.error("💥 CRASH inside getMyFavoriteClass():", err.message);
+    }
+  }
+
+  // 3. Check Trainer Application
+  if (user?.id) {
+    try {
+      myApplication = await getNewTrainerApplication(user.id);
+      console.log("DEBUG: Trainer application loaded", myApplication);
+    } catch (err) {
+      console.error("💥 CRASH inside getNewTrainerApplication():", err.message);
+    }
+  }
+
+  if (!user) {
+    return (
+      <div className="bg-[#071E22] min-h-screen flex items-center justify-center text-white">
+        <p>Failed to clear user session or no user logged in.</p>
+      </div>
+    );
+  }
 
   return (
     <div className="bg-[#071E22] min-h-screen">
       <Profile user={user} />
-      <div className="lg:flex justify-between items-center max-w-5xl mx-auto lg:px-0 px-4">
-        <Statistics myClass={favClass} />
+      <div className="lg:flex justify-between items-center container mx-auto lg:px-0 px-4 gap-6">
+        <Statistics myClass={favClass} myBookings={[]} />
         <ApplicationStatus myApplication={myApplication} />
       </div>
     </div>

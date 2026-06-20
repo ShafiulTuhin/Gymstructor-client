@@ -7,6 +7,9 @@ import { FiEye, FiSearch } from "react-icons/fi";
 const AllClasses = ({ classes }) => {
   const [search, setSearch] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("all");
+  const [currentPage, setCurrentPage] = useState(1);
+
+  const itemsPerPage = 9;
   const categories = [
     "all",
     ...new Set(
@@ -36,16 +39,30 @@ const AllClasses = ({ classes }) => {
 
     return matchSearch && matchCategory;
   });
+  const totalPages = Math.ceil(filteredClasses.length / itemsPerPage);
+
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const paginatedClasses = filteredClasses.slice(
+    startIndex,
+    startIndex + itemsPerPage,
+  );
   return (
     <div className="mx-auto bg-[#071E22] px-5 py-10">
       {/* ================= Search ================= */}
-      <div className="mb-10 flex justify-end">
+      <div className="mb-10 md:flex justify-between items-center">
+        <h2 className="text-white lg:ml-[480px] text-center md:text-left font-bold text-3xl md:mb-0 mb-5">
+          All Classes
+        </h2>
         <div className="flex w-full max-w-md overflow-hidden rounded-xl border border-gray-700 bg-[#0F3D3E]">
           <input
             type="text"
             placeholder="Search class..."
             value={search}
-            onChange={(e) => setSearch(e.target.value)}
+            // onChange={(e) => setSearch(e.target.value)}
+            onChange={(e) => {
+              setSearch(e.target.value);
+              setCurrentPage(1);
+            }}
             className="flex-1 bg-transparent px-4 py-3 text-white outline-none placeholder:text-gray-400"
           />
 
@@ -65,7 +82,11 @@ const AllClasses = ({ classes }) => {
             {categories.map((category) => (
               <button
                 key={category}
-                onClick={() => setSelectedCategory(category)}
+                // onClick={() => setSelectedCategory(category)}
+                onClick={() => {
+                  setSelectedCategory(category);
+                  setCurrentPage(1);
+                }}
                 className={`w-full rounded-lg px-4 py-2 text-left transition ${
                   selectedCategory === category
                     ? "bg-[#4EA618] text-white"
@@ -82,7 +103,7 @@ const AllClasses = ({ classes }) => {
 
         <section className="lg:col-span-3">
           <div className="grid gap-6 sm:grid-cols-2 xl:grid-cols-3">
-            {filteredClasses?.map((item) => (
+            {paginatedClasses?.map((item) => (
               <div
                 key={item._id}
                 className="flex h-full flex-col overflow-hidden rounded-2xl bg-[#0F3D3E] shadow-lg transition duration-300 hover:-translate-y-1 hover:shadow-xl"
@@ -129,7 +150,41 @@ const AllClasses = ({ classes }) => {
               </div>
             ))}
           </div>
+          {totalPages > 1 && (
+            <div className="mt-10 flex justify-center items-center gap-2 flex-wrap">
+              <button
+                onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
+                disabled={currentPage === 1}
+                className="px-4 py-2 rounded-lg bg-[#173f40] text-white disabled:opacity-40"
+              >
+                Previous
+              </button>
 
+              {Array.from({ length: totalPages }, (_, index) => (
+                <button
+                  key={index}
+                  onClick={() => setCurrentPage(index + 1)}
+                  className={`w-10 h-10 rounded-lg font-semibold transition ${
+                    currentPage === index + 1
+                      ? "bg-[#4EA618] text-white"
+                      : "bg-[#173f40] text-gray-300 hover:bg-[#4EA618]"
+                  }`}
+                >
+                  {index + 1}
+                </button>
+              ))}
+
+              <button
+                onClick={() =>
+                  setCurrentPage((prev) => Math.min(prev + 1, totalPages))
+                }
+                disabled={currentPage === totalPages}
+                className="px-4 py-2 rounded-lg bg-[#173f40] text-white disabled:opacity-40 cursor-pointer"
+              >
+                Next
+              </button>
+            </div>
+          )}
           {classes?.length === 0 && (
             <div className="flex h-72 items-center justify-center rounded-2xl border border-dashed border-gray-700">
               <p className="text-lg text-gray-400">No classes available.</p>

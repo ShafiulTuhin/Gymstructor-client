@@ -9,12 +9,12 @@ const MyBookingsClasses = async () => {
   const myBookings = result.data || [];
 
   return (
-    <div className="min-h-screen p-6 bg-gradient-to-b from-[#1B1B1B] via-gray-900 to-[#0b1220] text-white">
+    <div className="min-h-screen p-6 bg-[#071E22] text-white">
       <h1 className="text-2xl font-semibold mb-6">My Booked Classes</h1>
 
       <div className="overflow-x-auto rounded-xl border border-gray-800">
         <table className="w-full text-sm text-left">
-          <thead className="bg-[#111827] text-gray-300 uppercase text-xs">
+          <thead className="bg-[#0F3D3E] text-gray-300 uppercase text-xs">
             <tr>
               <th className="px-4 py-3">Class</th>
               <th className="px-4 py-3">Trainer</th>

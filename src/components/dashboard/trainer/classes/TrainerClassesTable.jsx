@@ -129,7 +129,7 @@ const statusColor = {
 const TrainerClassesTable = ({ classes = [] }) => {
   return (
     <div className="min-h-screen w-full bg-[#071E22] p-6">
-      <div className="mx-auto max-w-6xl overflow-x-auto rounded-2xl border border-[#173f40] bg-[#0F3D3E] shadow-xl">
+      <div className="mx-auto  overflow-x-auto rounded-2xl border border-[#173f40] bg-[#0F3D3E] shadow-xl">
         <table className="w-full text-left">
           {/* HEADER */}
           <thead className="bg-[#173f40] text-sm uppercase text-gray-300">

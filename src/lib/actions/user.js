@@ -41,8 +41,27 @@ export const createPaymentAndBooking = async ({
   return data;
 };
 
+// export const getBookingAndPaymentDetails = async (userId) => {
+//   const res = await fetch(`${baseUrl}/api/payment/${userId}`);
+//   const data = await res.json();
+//   return data;
+// };
+
 export const getBookingAndPaymentDetails = async (userId) => {
   const res = await fetch(`${baseUrl}/api/payment/${userId}`);
-  const data = await res.json();
-  return data;
+
+  // 1. Get the response as plain text first to see what it actually is
+  const textData = await res.text();
+  console.log("RAW RESPONSE FROM SERVER FOR PAYMENTS:", textData);
+
+  // 2. Try parsing it manually to catch the exact moment it fails
+  try {
+    return JSON.parse(textData);
+  } catch (err) {
+    console.error(
+      "This is the endpoint that broke! Failed parsing:",
+      baseUrl + `/api/payment/${userId}`,
+    );
+    return { error: true };
+  }
 };

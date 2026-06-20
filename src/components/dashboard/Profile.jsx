@@ -1,6 +1,7 @@
-// export default Profile;
+"use client";
 import Image from "next/image";
 import Avator from "../../assets/avatar.png";
+import { authClient } from "@/lib/auth-client";
 
 const Profile = ({ user }) => {
   const { name, email, image, role, createdAt, updatedAt } = user;
