@@ -36,7 +36,7 @@ const Sidebar = ({ user }) => {
           {
             icon: PlusShape,
             href: "/dashboard/user/apply-for-trainer",
-            label: "Be a Trainer",
+            label: "Apply for a Trainer",
           },
           {
             icon: GrFavorite,

@@ -32,6 +32,7 @@ export default async function Success({ searchParams }) {
       userId: session.metadata.userId,
       userName: session.metadata.userName,
       classId: session.metadata.classId,
+      trainerName: session.metadata.trainerName,
       className: session.metadata.className,
       amount: paymentIntent.amount,
       currency: paymentIntent.currency,

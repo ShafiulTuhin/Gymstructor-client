@@ -32,6 +32,7 @@ export async function POST(req) {
         userName: user?.name,
         classId: myClass._id?.toString(),
         className: myClass?.className,
+        trainerName: myClass?.trainerName,
         price: String(myClass.price),
       },
 
