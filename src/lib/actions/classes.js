@@ -53,3 +53,29 @@ export const deleteClass = async (id) => {
     },
   });
 };
+
+// Get featured classes
+export const getTopClasses = async () => {
+  const res = await fetch(`${baseUrl}/api/classes/top`, {
+    cache: "no-store",
+  });
+
+  if (!res.ok) {
+    throw new Error("Failed to fetch top classes");
+  }
+
+  return res.json();
+};
+
+// Get featured classes
+export const getLatestClasses = async () => {
+  const res = await fetch(`${baseUrl}/api/classes/latest`, {
+    cache: "no-store",
+  });
+
+  if (!res.ok) {
+    throw new Error("Failed to fetch latest classes");
+  }
+
+  return res.json();
+};

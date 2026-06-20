@@ -26,7 +26,10 @@ import Profile from "@/components/dashboard/Profile";
 import ApplicationStatus from "@/components/user/ApplicationStatus";
 import Statistics from "@/components/user/Statistics";
 import { getMyFavoriteClass } from "@/lib/actions/favorite";
-import { getNewTrainerApplication } from "@/lib/actions/user";
+import {
+  getBookingAndPaymentDetails,
+  getNewTrainerApplication,
+} from "@/lib/actions/user";
 import { getUserSession } from "@/lib/core/session";
 
 const UserHomePage = async () => {
@@ -61,6 +64,9 @@ const UserHomePage = async () => {
       console.error("💥 CRASH inside getNewTrainerApplication():", err.message);
     }
   }
+  const bookings = await getBookingAndPaymentDetails(user?.id);
+  const myBookings = bookings.data;
+  console.log(myBookings);
 
   if (!user) {
     return (
@@ -74,7 +80,7 @@ const UserHomePage = async () => {
     <div className="bg-[#071E22] min-h-screen">
       <Profile user={user} />
       <div className="lg:flex justify-between items-center container mx-auto lg:px-0 px-4 gap-6">
-        <Statistics myClass={favClass} myBookings={[]} />
+        <Statistics myClass={favClass} myBookings={myBookings} />
         <ApplicationStatus myApplication={myApplication} />
       </div>
     </div>

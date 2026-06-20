@@ -6,7 +6,7 @@ import { FiArrowLeft } from "react-icons/fi";
 
 const statusColor = {
   pending: "bg-yellow-500/20 text-yellow-300 border-yellow-500/30",
-  approved: "bg-green-500/20 text-green-300 border-green-500/30",
+  approved: "bg-green-500 text-green-100 border-green-500/30",
   rejected: "bg-red-500/20 text-red-300 border-red-500/30",
 };
 

@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { FiAlertTriangle, FiRefreshCw } from "react-icons/fi";
 
 export default function Error({ error, reset }) {
@@ -35,13 +36,11 @@ export default function Error({ error, reset }) {
         )}
 
         {/* Button */}
-        <button
-          onClick={() => reset()}
-          className="mt-6 w-full py-3 rounded-xl bg-[#4EA618] text-white font-semibold hover:bg-green-600 transition flex items-center justify-center gap-2"
-        >
-          <FiRefreshCw className="text-sm" />
-          Try Again
-        </button>
+        <Link href={"/"}>
+          <button className="mt-6 w-full py-3 rounded-xl bg-[#4EA618] text-white font-semibold hover:bg-green-600 transition cursor-pointer">
+            Back To Home
+          </button>
+        </Link>
 
         {/* Footer */}
         <p className="text-xs text-gray-500 mt-4 relative">

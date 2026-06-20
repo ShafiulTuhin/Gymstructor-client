@@ -15,8 +15,9 @@ import { Button, Drawer } from "@heroui/react";
 import User from "./User";
 import Link from "next/link";
 import { GrFavorite } from "react-icons/gr";
+import { requireRole } from "@/lib/core/session";
 
-const Sidebar = ({ user }) => {
+const Sidebar = async ({ user }) => {
   // console.log(user);
 
   const navItems =

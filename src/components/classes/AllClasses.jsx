@@ -49,199 +49,205 @@ const AllClasses = ({ classes }) => {
     startIndex + itemsPerPage,
   );
   return (
-    <div className="mx-auto bg-[#071E22] px-5 py-10">
-      {/* ================= Search ================= */}
-      <div className="mb-10 md:flex justify-between items-center">
-        <h2 className="text-white lg:ml-[480px] text-center md:text-left font-bold text-3xl md:mb-0 mb-5">
-          All Classes
-        </h2>
-        <div className="flex w-full max-w-md overflow-hidden rounded-xl border border-gray-700 bg-[#0F3D3E]">
-          <input
-            type="text"
-            placeholder="Search class..."
-            value={search}
-            // onChange={(e) => setSearch(e.target.value)}
-            onChange={(e) => {
-              setSearch(e.target.value);
-              setCurrentPage(1);
-            }}
-            className="flex-1 bg-transparent px-4 py-3 text-white outline-none placeholder:text-gray-400"
-          />
+    <div className="bg-[#071E22]">
+      <div className="mx-auto container px-5 py-10">
+        {/* ================= Search ================= */}
+        <div className="mb-10 md:flex justify-between items-center">
+          <h2 className="text-white lg:ml-[380px] text-center md:text-left font-bold text-3xl md:mb-0 mb-5">
+            All Classes
+          </h2>
+          <div className="flex w-full max-w-md overflow-hidden rounded-xl border border-gray-700 bg-[#0F3D3E]">
+            <input
+              type="text"
+              placeholder="Search class..."
+              value={search}
+              // onChange={(e) => setSearch(e.target.value)}
+              onChange={(e) => {
+                setSearch(e.target.value);
+                setCurrentPage(1);
+              }}
+              className="flex-1 bg-transparent px-4 py-3 text-white outline-none placeholder:text-gray-400"
+            />
 
-          <button className="flex items-center gap-2 bg-[#4EA618] px-5 font-medium text-white transition hover:bg-green-700">
-            <FiSearch />
-            Search
-          </button>
+            <button className="flex items-center gap-2 bg-[#4EA618] px-5 font-medium text-white transition hover:bg-green-700">
+              <FiSearch />
+              Search
+            </button>
+          </div>
         </div>
-      </div>
 
-      <div className="grid gap-8 lg:grid-cols-4">
-        {/* ================= Category ================= */}
-        <aside className="rounded-2xl bg-[#0F3D3E] p-6 shadow-lg h-fit">
-          <h2 className="mb-5 text-xl font-semibold text-white">Categories</h2>
+        <div className="grid gap-8 lg:grid-cols-4">
+          {/* ================= Category ================= */}
+          <aside className="rounded-2xl bg-[#0F3D3E] p-6 shadow-lg h-fit">
+            <h2 className="mb-5 text-xl font-semibold text-white">
+              Categories
+            </h2>
 
-          <div className="space-y-3">
-            {categories.map((category) => (
-              <button
-                key={category}
-                // onClick={() => setSelectedCategory(category)}
-                onClick={() => {
-                  setSelectedCategory(category);
-                  setCurrentPage(1);
-                }}
-                className={`w-full rounded-lg px-4 py-2 text-left transition ${
-                  selectedCategory === category
-                    ? "bg-[#4EA618] text-white"
-                    : "bg-[#173f40] text-gray-300"
-                }`}
-              >
-                {category === "all" ? "All Classes" : category}
-              </button>
-            ))}
-          </div>
-          {/* ================= Gym Feature Card ================= */}
-          <div className="mt-12 rounded-2xl border border-[#173f40] bg-gradient-to-b from-[#0F3D3E] to-[#071E22]  p-5 shadow-lg">
-            <h3 className="text-white text-lg font-semibold mb-3">
-              💪 Daily Fitness Tip
-            </h3>
-
-            <p className="text-gray-300 text-sm leading-6">
-              “Consistency beats intensity. Train a little every day and your
-              body will transform over time.”
-            </p>
-
-            <div className="mt-4 h-2 w-full rounded-full bg-[#173f40] overflow-hidden">
-              <div className="h-full w-2/3 bg-[#4EA618] rounded-full animate-pulse"></div>
-            </div>
-
-            <p className="mt-3 text-xs text-gray-400">
-              Weekly progress motivation
-            </p>
-          </div>
-          <div className="mt-8 rounded-2xl border border-[#173f40] bg-gradient-to-b from-[#0F3D3E] to-[#071E22] p-5 shadow-lg overflow-hidden">
-            <h3 className="text-white text-lg font-semibold mb-2">
-              🏋️ Training Mode
-            </h3>
-
-            <p className="text-gray-300 text-sm mb-4">
-              Stay consistent. Every rep makes you stronger.
-            </p>
-
-            {/* ANIMATION */}
-            <div className="flex justify-center items-center h-32 mt-5">
-              <div className="relative w-20 h-20">
-                {/* body */}
-                <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-6 h-12 bg-[#4EA618] rounded-md animate-bounce"></div>
-
-                {/* left weight */}
-                <div className="absolute top-2 left-0 w-4 h-4 bg-[#00C2FF] rounded-full animate-pulse"></div>
-
-                {/* right weight */}
-                <div className="absolute top-2 right-0 w-4 h-4 bg-[#00C2FF] rounded-full animate-pulse"></div>
-
-                {/* bar */}
-                <div className="absolute top-4 left-1/2 -translate-x-1/2 w-16 h-1 bg-gray-400"></div>
-              </div>
-            </div>
-
-            <p className="text-center text-xs text-gray-400 mt-2">
-              Keep pushing 💪
-            </p>
-          </div>
-        </aside>
-
-        {/* ================= Classes ================= */}
-
-        <section className="lg:col-span-3">
-          <div className="grid gap-6 sm:grid-cols-2 xl:grid-cols-3">
-            {paginatedClasses?.map((item) => (
-              <div
-                key={item._id}
-                className="flex h-full flex-col overflow-hidden rounded-2xl bg-[#0F3D3E] shadow-lg transition duration-300 hover:-translate-y-1 hover:shadow-xl"
-              >
-                {/* Image */}
-                <div className="relative h-52 w-full">
-                  <Image
-                    src={item.image}
-                    alt={item.className}
-                    fill
-                    className="object-cover"
-                  />
-                </div>
-
-                {/* Body */}
-                <div className="flex flex-1 flex-col p-5">
-                  <h2 className="line-clamp-1 text-xl font-semibold text-white">
-                    {item.className}
-                  </h2>
-
-                  <div className="mt-3 flex justify-between text-sm text-gray-400">
-                    <span>{item.category}</span>
-                    <span>{item.difficulty}</span>
-                  </div>
-
-                  <p className="mt-4 line-clamp-3 flex-1 text-sm leading-6 text-gray-400">
-                    {item.description}
-                  </p>
-
-                  <div className="mt-6 flex items-center justify-between">
-                    <span className="text-lg font-bold text-[#4EA618]">
-                      ${item.price}
-                    </span>
-
-                    <Link
-                      href={`/classes/${item._id}`}
-                      className="flex items-center gap-2 rounded-lg bg-[#4EA618] px-4 py-2 text-sm font-semibold text-white transition hover:bg-green-700"
-                    >
-                      <FiEye />
-                      Details
-                    </Link>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-          {totalPages > 1 && (
-            <div className="mt-10 flex justify-center items-center gap-2 flex-wrap">
-              <button
-                onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
-                disabled={currentPage === 1}
-                className="px-4 py-2 rounded-lg bg-[#173f40] text-white disabled:opacity-40"
-              >
-                Previous
-              </button>
-
-              {Array.from({ length: totalPages }, (_, index) => (
+            <div className="space-y-3">
+              {categories.map((category) => (
                 <button
-                  key={index}
-                  onClick={() => setCurrentPage(index + 1)}
-                  className={`w-10 h-10 rounded-lg font-semibold transition ${
-                    currentPage === index + 1
+                  key={category}
+                  // onClick={() => setSelectedCategory(category)}
+                  onClick={() => {
+                    setSelectedCategory(category);
+                    setCurrentPage(1);
+                  }}
+                  className={`w-full rounded-lg px-4 py-2 text-left transition ${
+                    selectedCategory === category
                       ? "bg-[#4EA618] text-white"
-                      : "bg-[#173f40] text-gray-300 hover:bg-[#4EA618]"
+                      : "bg-[#173f40] text-gray-300"
                   }`}
                 >
-                  {index + 1}
+                  {category === "all" ? "All Classes" : category}
                 </button>
               ))}
+            </div>
+            {/* ================= Gym Feature Card ================= */}
+            <div className="mt-12 rounded-2xl border border-[#173f40] bg-gradient-to-b from-[#0F3D3E] to-[#071E22]  p-5 shadow-lg">
+              <h3 className="text-white text-lg font-semibold mb-3">
+                💪 Daily Fitness Tip
+              </h3>
 
-              <button
-                onClick={() =>
-                  setCurrentPage((prev) => Math.min(prev + 1, totalPages))
-                }
-                disabled={currentPage === totalPages}
-                className="px-4 py-2 rounded-lg bg-[#173f40] text-white disabled:opacity-40 cursor-pointer"
-              >
-                Next
-              </button>
+              <p className="text-gray-300 text-sm leading-6">
+                “Consistency beats intensity. Train a little every day and your
+                body will transform over time.”
+              </p>
+
+              <div className="mt-4 h-2 w-full rounded-full bg-[#173f40] overflow-hidden">
+                <div className="h-full w-2/3 bg-[#4EA618] rounded-full animate-pulse"></div>
+              </div>
+
+              <p className="mt-3 text-xs text-gray-400">
+                Weekly progress motivation
+              </p>
             </div>
-          )}
-          {classes?.length === 0 && (
-            <div className="flex h-72 items-center justify-center rounded-2xl border border-dashed border-gray-700">
-              <p className="text-lg text-gray-400">No classes available.</p>
+            <div className="mt-8 rounded-2xl border border-[#173f40] bg-gradient-to-b from-[#0F3D3E] to-[#071E22] p-5 shadow-lg overflow-hidden">
+              <h3 className="text-white text-lg font-semibold mb-2">
+                🏋️ Training Mode
+              </h3>
+
+              <p className="text-gray-300 text-sm mb-4">
+                Stay consistent. Every rep makes you stronger.
+              </p>
+
+              {/* ANIMATION */}
+              <div className="flex justify-center items-center h-32 mt-5">
+                <div className="relative w-20 h-20">
+                  {/* body */}
+                  <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-6 h-12 bg-[#4EA618] rounded-md animate-bounce"></div>
+
+                  {/* left weight */}
+                  <div className="absolute top-2 left-0 w-4 h-4 bg-[#00C2FF] rounded-full animate-pulse"></div>
+
+                  {/* right weight */}
+                  <div className="absolute top-2 right-0 w-4 h-4 bg-[#00C2FF] rounded-full animate-pulse"></div>
+
+                  {/* bar */}
+                  <div className="absolute top-4 left-1/2 -translate-x-1/2 w-16 h-1 bg-gray-400"></div>
+                </div>
+              </div>
+
+              <p className="text-center text-xs text-gray-400 mt-2">
+                Keep pushing 💪
+              </p>
             </div>
-          )}
-        </section>
+          </aside>
+
+          {/* ================= Classes ================= */}
+
+          <section className="lg:col-span-3">
+            <div className="grid gap-6 sm:grid-cols-2 xl:grid-cols-3">
+              {paginatedClasses?.map((item) => (
+                <div
+                  key={item._id}
+                  className="flex h-full flex-col overflow-hidden rounded-2xl bg-[#0F3D3E] shadow-lg transition duration-300 hover:-translate-y-1 hover:shadow-xl"
+                >
+                  {/* Image */}
+                  <div className="relative h-52 w-full">
+                    <Image
+                      src={item.image}
+                      alt={item.className}
+                      fill
+                      className="object-cover"
+                    />
+                  </div>
+
+                  {/* Body */}
+                  <div className="flex flex-1 flex-col p-5">
+                    <h2 className="line-clamp-1 text-xl font-semibold text-white">
+                      {item.className}
+                    </h2>
+
+                    <div className="mt-3 flex justify-between text-sm text-gray-400">
+                      <span>{item.category}</span>
+                      <span>{item.difficulty}</span>
+                    </div>
+
+                    <p className="mt-4 line-clamp-3 flex-1 text-sm leading-6 text-gray-400">
+                      {item.description}
+                    </p>
+
+                    <div className="mt-6 flex items-center justify-between">
+                      <span className="text-lg font-bold text-[#4EA618]">
+                        ${item.price}
+                      </span>
+
+                      <Link
+                        href={`/classes/${item._id}`}
+                        className="flex items-center gap-2 rounded-lg bg-[#4EA618] px-4 py-2 text-sm font-semibold text-white transition hover:bg-green-700"
+                      >
+                        <FiEye />
+                        Details
+                      </Link>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+            {totalPages > 1 && (
+              <div className="mt-10 flex justify-center items-center gap-2 flex-wrap">
+                <button
+                  onClick={() =>
+                    setCurrentPage((prev) => Math.max(prev - 1, 1))
+                  }
+                  disabled={currentPage === 1}
+                  className="px-4 py-2 rounded-lg bg-[#173f40] text-white disabled:opacity-40"
+                >
+                  Previous
+                </button>
+
+                {Array.from({ length: totalPages }, (_, index) => (
+                  <button
+                    key={index}
+                    onClick={() => setCurrentPage(index + 1)}
+                    className={`w-10 h-10 rounded-lg font-semibold transition ${
+                      currentPage === index + 1
+                        ? "bg-[#4EA618] text-white"
+                        : "bg-[#173f40] text-gray-300 hover:bg-[#4EA618]"
+                    }`}
+                  >
+                    {index + 1}
+                  </button>
+                ))}
+
+                <button
+                  onClick={() =>
+                    setCurrentPage((prev) => Math.min(prev + 1, totalPages))
+                  }
+                  disabled={currentPage === totalPages}
+                  className="px-4 py-2 rounded-lg bg-[#173f40] text-white disabled:opacity-40 cursor-pointer"
+                >
+                  Next
+                </button>
+              </div>
+            )}
+            {classes?.length === 0 && (
+              <div className="flex h-72 items-center justify-center rounded-2xl border border-dashed border-gray-700">
+                <p className="text-lg text-gray-400">No classes available.</p>
+              </div>
+            )}
+          </section>
+        </div>
       </div>
     </div>
   );
