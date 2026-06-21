@@ -83,7 +83,6 @@ const ForumDetails = ({ forum, user }) => {
                 className="w-full h-[260px] md:h-[450px] object-cover rounded-2xl transition-transform duration-300 group-hover:scale-[1.01]"
               />
 
-              {/* <div className="absolute inset-0 bg-gradient-to-t from-[#111827] via-black/20 to-transparent rounded-xl" /> */}
               <div className="absolute inset-0 bg-gradient-to-t from-[#111827]/95 via-black/25 to-transparent rounded-2xl" />
             </div>
           </div>
@@ -117,17 +116,20 @@ const ForumDetails = ({ forum, user }) => {
                 {/* Previous Comments (UI only) */}
                 <div className="mt-6 space-y-3">
                   {forumData?.comments?.length > 0 ? (
-                    forumData.comments.map((c) => (
-                      <div
-                        key={c._id}
-                        className="bg-[#0F3D3E] p-3 rounded-lg border border-white/10"
-                      >
-                        <p className="text-white text-sm">{c.text}</p>
-                        <span className="text-xs text-gray-400">
-                          by {c.userName}
-                        </span>
-                      </div>
-                    ))
+                    [...forumData.comments]
+                      .reverse()
+                      .slice(0, 3)
+                      .map((c) => (
+                        <div
+                          key={c._id}
+                          className="bg-[#0F3D3E] p-3 rounded-lg border border-white/10"
+                        >
+                          <p className="text-white text-sm">{c.text}</p>
+                          <span className="text-xs text-gray-400">
+                            by {c.userName}
+                          </span>
+                        </div>
+                      ))
                   ) : (
                     <p className="text-gray-400 text-sm">No comments yet</p>
                   )}

@@ -77,8 +77,8 @@ export default function LikeUnlike({ user, forum }) {
       <div className="w-[200px] text-gray-300">
         <h2 className="text-2xl mb-4">Note:</h2>
         <p>
-          Everybody is allowed to make a vote only, once you clicked like/unlike
-          it will be counted. Can't change your vote again
+          A person is allowed to make one vote only, once you clicked
+          like/unlike it will be counted. Can't change your vote again
         </p>
       </div>
     </>

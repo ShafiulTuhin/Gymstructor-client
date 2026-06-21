@@ -3,7 +3,10 @@ import { getAllClasses } from "@/lib/actions/classes";
 import React from "react";
 
 const AllClassesPage = async () => {
-  const classes = await getAllClasses();
+  const data = await getAllClasses();
+  const classes = data.classes;
+  // console.log("Get all classes", classes);
+
   return (
     <div>
       <AllClasses classes={classes} />

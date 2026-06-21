@@ -21,7 +21,9 @@ export const getAllClasses = async () => {
 };
 // Get admin classes
 export const getAdminClasses = async () => {
-  const res = await fetch(`${baseUrl}/api/classes`);
+  const res = await fetch(`${baseUrl}/api/classes`, {
+    cache: "no-store",
+  });
   return res.json();
 };
 
