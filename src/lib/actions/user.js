@@ -1,4 +1,7 @@
 "use server";
+
+import { revalidatePath } from "next/cache";
+
 const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
 
 export const createNewTrainerApplication = async (newTrainerData) => {
@@ -41,12 +44,7 @@ export const createPaymentAndBooking = async ({
   return data;
 };
 
-// export const getBookingAndPaymentDetails = async (userId) => {
-//   const res = await fetch(`${baseUrl}/api/payment/${userId}`);
-//   const data = await res.json();
-//   return data;
-// };
-
+// Get payment and booking details for user
 export const getBookingAndPaymentDetails = async (userId) => {
   const res = await fetch(`${baseUrl}/api/payment/${userId}`);
 
@@ -64,4 +62,37 @@ export const getBookingAndPaymentDetails = async (userId) => {
     );
     return { error: true };
   }
+};
+// Get payment and booking details for admin:
+export const getAllBookings = async () => {
+  const res = await fetch(`${baseUrl}/api/payments`);
+  const bookings = await res.json();
+  return bookings.data;
+};
+
+// Get all Users:
+export const getAllUser = async () => {
+  const res = await fetch(`${baseUrl}/api/users`);
+  const data = await res.json();
+  return data.users;
+};
+
+export const updateUserRole = async (userId, role) => {
+  const res = await fetch(`${baseUrl}/api/users/${userId}/role`, {
+    method: "PATCH",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ role }),
+  });
+  revalidatePath("/dashboard/admin/users");
+  return res.json();
+};
+
+export const updateUserStatus = async (userId, status) => {
+  const res = await fetch(`${baseUrl}/api/users/${userId}/status`, {
+    method: "PATCH",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ status }),
+  });
+  revalidatePath("/dashboard/admin/users");
+  return res.json();
 };

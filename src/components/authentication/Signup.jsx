@@ -178,7 +178,7 @@ const Signup = () => {
           {/* BUTTON */}
           <button
             type="submit"
-            className="w-full bg-[#4EA618] hover:bg-green-600 transition py-3 rounded-lg font-semibold"
+            className="w-full bg-[#4EA618] hover:bg-green-600 transition py-3 rounded-lg font-semibold cursor-pointer"
           >
             Register
           </button>
@@ -193,7 +193,7 @@ const Signup = () => {
 
         <button
           onClick={handleGoogleLogin}
-          className="w-full flex items-center justify-center gap-3 bg-[#173f40] border border-gray-700 py-3 rounded-lg hover:border-[#4EA618] transition"
+          className="cursor-pointer w-full flex items-center justify-center gap-3 bg-[#173f40] border border-gray-700 py-3 rounded-lg hover:border-[#4EA618] transition"
         >
           <Image
             src="https://www.svgrepo.com/show/475656/google-color.svg"

@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { FiArrowLeft } from "react-icons/fi";
+import { toast } from "react-toastify";
 
 const statusColor = {
   pending: "bg-yellow-500/20 text-yellow-300 border-yellow-500/30",

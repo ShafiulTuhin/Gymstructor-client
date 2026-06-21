@@ -1,9 +1,12 @@
 "use client";
 
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+
 import { FiAlertTriangle, FiRefreshCw } from "react-icons/fi";
 
 export default function Error({ error, reset }) {
+  const router = useRouter();
   return (
     <div className="min-h-screen bg-[#071E22] flex items-center justify-center px-4">
       <div className="w-full max-w-md rounded-2xl border border-[#173f40] bg-gradient-to-b from-[#0F3D3E] to-[#071E22] shadow-2xl p-8 text-center relative overflow-hidden">
@@ -36,11 +39,18 @@ export default function Error({ error, reset }) {
         )}
 
         {/* Button */}
-        <Link href={"/"}>
+        {/* <Link href={"/"}>
           <button className="mt-6 w-full py-3 rounded-xl bg-[#4EA618] text-white font-semibold hover:bg-green-600 transition cursor-pointer">
             Back To Home
           </button>
-        </Link>
+        </Link> */}
+        <button
+          // onClick={() => router.push("/")}
+          href={"/"}
+          className="cursor=pointer mt-6 w-full py-3 rounded-xl bg-[#4EA618] text-white font-semibold hover:bg-green-600 transition cursor-pointer"
+        >
+          Back To Home
+        </button>
 
         {/* Footer */}
         <p className="text-xs text-gray-500 mt-4 relative">

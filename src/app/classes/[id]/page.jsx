@@ -7,6 +7,8 @@ import { Button } from "@heroui/react";
 import Link from "next/link";
 import React from "react";
 import Error from "./error";
+import { toast } from "react-toastify";
+import BookNowButton from "@/components/user/BookNowButton";
 
 const DetailsClassPage = async ({ params }) => {
   const { id } = await params;
@@ -21,6 +23,7 @@ const DetailsClassPage = async ({ params }) => {
   if (myClass.error) {
     return <Error error={myClass.error} />;
   }
+
   return (
     <div className="min-h-screen bg-[#071E22] px-5 py-10">
       <ClassDetails myClass={myClass} />
@@ -30,7 +33,7 @@ const DetailsClassPage = async ({ params }) => {
         <div className="flex gap-4">
           {/* BOOK BUTTON */}
 
-          {isBooked ? (
+          {/* {isBooked ? (
             <Button
               disabled
               className="bg-gray-600 text-white px-10 py-5 rounded-lg font-semibold cursor-not-allowed"
@@ -43,7 +46,8 @@ const DetailsClassPage = async ({ params }) => {
                 Book Class
               </Button>
             </Link>
-          )}
+          )} */}
+          <BookNowButton user={user} myClass={myClass} isBooked={isBooked} />
 
           {/* FAVORITE BUTTON */}
           <AddToFavorite user={user} myClass={myClass} />
