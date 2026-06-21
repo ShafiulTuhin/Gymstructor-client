@@ -1,5 +1,6 @@
 "use client";
 
+import { deleteClass } from "@/lib/actions/classes";
 import { AlertDialog, Button } from "@heroui/react";
 import { useRouter } from "next/navigation";
 import React from "react";
@@ -9,17 +10,8 @@ import { toast } from "react-toastify";
 const DeleteClass = ({ myClass }) => {
   const router = useRouter();
 
-  const deleteClass = async () => {
-    const res = await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_URL}/api/classes/${myClass._id}`,
-      {
-        method: "DELETE",
-        headers: {
-          "content-type": "application/json",
-        },
-      },
-    );
-    await res.json();
+  const deleteSingleClass = async () => {
+    const res = deleteClass(myClass?._id);
 
     toast.success(`${myClass.className} successfully deleted`);
 
@@ -54,7 +46,11 @@ const DeleteClass = ({ myClass }) => {
                 <Button slot="close" variant="tertiary" className="text-black">
                   Cancel
                 </Button>
-                <Button onClick={deleteClass} slot="close" variant="danger">
+                <Button
+                  onClick={deleteSingleClass}
+                  slot="close"
+                  variant="danger"
+                >
                   Delete Class
                 </Button>
               </AlertDialog.Footer>

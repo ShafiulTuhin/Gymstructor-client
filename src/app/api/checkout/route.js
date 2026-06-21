@@ -14,13 +14,9 @@ export async function POST(req) {
     });
     const user = userSession?.user;
     const { classId } = await req.json();
-    console.log(classId);
+
     const myClass = await getSingleClass(classId);
     const amount = Number(myClass.price);
-
-    console.log("FINAL AMOUNT:", amount);
-    console.log("IS NAN:", isNaN(amount));
-    console.log("Type:", typeof amount);
 
     const session = await stripe.checkout.sessions.create({
       customer_email: user?.email,
@@ -43,7 +39,7 @@ export async function POST(req) {
             product_data: {
               name: myClass.className,
             },
-            unit_amount: parseInt(myClass.price, 10),
+            unit_amount: parseInt(myClass.price * 100, 10),
           },
           quantity: 1,
         },

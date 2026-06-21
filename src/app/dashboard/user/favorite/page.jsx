@@ -6,7 +6,6 @@ import React from "react";
 const FavoritePage = async () => {
   const user = await getUserSession();
   const favClasses = await getMyFavoriteClass(user?.id);
-  console.log(favClasses);
 
   return (
     <div>

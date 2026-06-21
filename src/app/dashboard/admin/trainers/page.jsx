@@ -5,7 +5,6 @@ import React from "react";
 const TrainerPage = async () => {
   const users = await getAllUser();
   const trainers = users.filter((trainer) => trainer.role === "trainer");
-  //   console.log(trainers);
 
   return (
     <div>

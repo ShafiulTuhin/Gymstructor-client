@@ -23,7 +23,7 @@ import { toast } from "react-toastify";
 const EditClass = ({ myClass }) => {
   const { _id, className, category, difficulty, duration, price, description } =
     myClass;
-
+  const scheduleData = myClass?.schedule || [];
   const router = useRouter();
 
   const handleSubmit = async (e) => {
@@ -45,12 +45,12 @@ const EditClass = ({ myClass }) => {
 
       <Modal.Backdrop>
         <Modal.Container placement="center">
-          <Modal.Dialog className="sm:max-w-2xl w-full max-h-[90vh] flex flex-col bg-gradient-to-r from-[#4EA618] to-[#192425] text-white rounded-2xl shadow-2xl">
+          <Modal.Dialog className="sm:max-w-2xl w-full max-h-[90vh] flex flex-col  bg-[#071E22]  text-white rounded-2xl shadow-2xl">
             <Modal.CloseTrigger />
 
             {/* HEADER */}
             <Modal.Header className="border-b border-gray-200 px-6 py-4">
-              <Modal.Heading className="text-lg font-semibold">
+              <Modal.Heading className="text-lg font-semibold text-gray-300">
                 Edit Class Information
               </Modal.Heading>
             </Modal.Header>
@@ -73,15 +73,19 @@ const EditClass = ({ myClass }) => {
                         </Label>
                         <Input
                           name="className"
-                          className="bg-gray-200 rounded-lg"
+                          className="bg-[#173f40] rounded-lg text-white"
                         />
                       </TextField>
 
                       <div>
-                        <Select name="category" defaultValue={category || ""}>
+                        <Select
+                          name="category"
+                          defaultSelectedKey={category || undefined}
+                        >
                           <Label className="text-white">Category</Label>
-                          <Select.Trigger className="bg-gray-200">
-                            <Select.Value />
+                          <Select.Trigger className="bg-[#173f40] text-white">
+                            {/* TIP: Add a placeholder here for when category is empty */}
+                            <Select.Value placeholder="Select a category" />
                             <Select.Indicator className="text-gray-900" />
                           </Select.Trigger>
 
@@ -90,7 +94,7 @@ const EditClass = ({ myClass }) => {
                               <ListBox.Item id="yoga">Yoga</ListBox.Item>
                               <ListBox.Item id="gym">Gym</ListBox.Item>
                               <ListBox.Item id="cardio">Cardio</ListBox.Item>
-                              {/* <ListBox.Item id="sales">Sales</ListBox.Item> */}
+                              <ListBox.Item id="weights">Weights</ListBox.Item>
                             </ListBox>
                           </Select.Popover>
                         </Select>
@@ -105,7 +109,7 @@ const EditClass = ({ myClass }) => {
                         </Label>
 
                         <Select name="difficulty" defaultValue={difficulty}>
-                          <Select.Trigger className="bg-gray-200 w-full rounded-lg">
+                          <Select.Trigger className="bg-[#173f40] w-full rounded-lg text-white">
                             <Select.Value />
                           </Select.Trigger>
 
@@ -133,15 +137,71 @@ const EditClass = ({ myClass }) => {
                         <Input
                           name="duration"
                           defaultValue={duration}
-                          className="bg-gray-200 rounded-lg"
+                          className="bg-[#173f40] rounded-lg text-white"
                           placeholder="e.g. 60 mins"
                         />
                       </div>
                     </div>
                   </Fieldset>
+                  {/* SCHEDULE */}
+                  {/* SCHEDULE */}
+                  <div>
+                    <Label className="text-white text-sm mb-2 block">
+                      Schedule
+                    </Label>
 
+                    {(scheduleData?.length > 0
+                      ? scheduleData
+                      : [{ day: "", time: "" }]
+                    ).map((item, index) => (
+                      <div key={index} className="grid grid-cols-2 gap-3 mb-3">
+                        {/* DAY DROPDOWN */}
+                        <select
+                          name={`schedule[${index}].day`}
+                          defaultValue={item?.day || ""}
+                          className="bg-[#173f40] rounded-lg text-white w-full p-2 text-white"
+                        >
+                          <option value="" disabled>
+                            Select Day
+                          </option>
+                          <option value="Monday">Monday</option>
+                          <option value="Tuesday">Tuesday</option>
+                          <option value="Wednesday">Wednesday</option>
+                          <option value="Thursday">Thursday</option>
+                          <option value="Friday">Friday</option>
+                          <option value="Saturday">Saturday</option>
+                          <option value="Sunday">Sunday</option>
+                        </select>
+
+                        {/* TIME PICKER */}
+                        <input
+                          type="time"
+                          name={`schedule[${index}].time`}
+                          defaultValue={item?.time || ""}
+                          className="bg-[#173f40] rounded-lg text-white w-full p-2 text-white"
+                        />
+                      </div>
+                    ))}
+
+                    {/* EMPTY STATE */}
+                    {(!scheduleData || scheduleData.length === 0) && (
+                      <p className="text-gray-400 text-sm">No schedule added</p>
+                    )}
+                  </div>
                   {/* SECTION 2 */}
+
                   <Fieldset className="space-y-4">
+                    <div>
+                      <Label className="text-white text-sm mb-1 block">
+                        Price
+                      </Label>
+
+                      <input
+                        name="price"
+                        defaultValue={price}
+                        className="bg-[#173f40] rounded-lg text-white w-full p-2"
+                      />
+                    </div>
                     <div>
                       <Label className="text-white text-sm mb-1 block">
                         Description
@@ -151,19 +211,7 @@ const EditClass = ({ myClass }) => {
                         name="description"
                         defaultValue={description}
                         rows={4}
-                        className="bg-gray-200 rounded-lg w-full"
-                      />
-                    </div>
-
-                    <div>
-                      <Label className="text-white text-sm mb-1 block">
-                        Price
-                      </Label>
-
-                      <input
-                        name="price"
-                        defaultValue={price}
-                        className="bg-gray-200 rounded-lg w-full p-2"
+                        className="bg-[#173f40] rounded-lg text-white w-full"
                       />
                     </div>
                   </Fieldset>

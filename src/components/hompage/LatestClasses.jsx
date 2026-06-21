@@ -17,7 +17,7 @@ const LatestClasses = async () => {
           <div className="grid md:grid-cols-3 gap-6">
             {classes.map((cls) => (
               <div
-                key={cls.id}
+                key={cls._id}
                 className="bg-gradient-to-r from-[#071E22] to-[#0F3D3E] border border-white/10 rounded-xl space-y-6 p-5 text-white hover:scale-[1.02] transition"
               >
                 {/* Image */}

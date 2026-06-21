@@ -32,7 +32,6 @@ const UserTable = ({ users }) => {
     const updatedUserRole = await updateUserRole(id, user.role);
 
     toast.success("Updated successfully");
-    console.log(updatedUserRole);
   };
   //Handle status update
   const handleUpdateStatus = async (id, status) => {

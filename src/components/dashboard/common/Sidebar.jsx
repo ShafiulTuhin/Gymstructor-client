@@ -19,8 +19,6 @@ import { MdSettingsApplications } from "react-icons/md";
 import { FaChalkboardTeacher } from "react-icons/fa";
 
 const Sidebar = async ({ user }) => {
-  // console.log(user);
-
   const navItems =
     user?.role === "user"
       ? [
@@ -98,8 +96,8 @@ const Sidebar = async ({ user }) => {
 
             {
               icon: CreditCard,
-              href: "/dashboard/admin/payments",
-              label: "Payment",
+              href: "/dashboard/admin/classes",
+              label: "Manage Classes",
             },
             {
               icon: Gear,

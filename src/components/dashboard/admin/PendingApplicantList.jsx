@@ -60,12 +60,6 @@ const PendingApplicantList = ({ applications }) => {
                   </td>
 
                   <td className="px-4 py-3 text-center">
-                    {/* <Link
-                      href={`/dashboard/admin/applications/${application?._id}`}
-                      className="inline-block rounded-lg bg-[#00C2FF] px-4 py-2 text-xs font-medium text-white transition hover:opacity-90"
-                    >
-                      Details
-                    </Link> */}
                     <TrainerApprovalModal application={application} />
                   </td>
                 </tr>

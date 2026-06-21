@@ -48,15 +48,28 @@ export const updateClass = async (id, updatedClass) => {
 
   return res.json();
 };
+// Update class status (for admin)
+export const updateClassStatus = async (id, status) => {
+  const res = await fetch(`${baseUrl}/api/classes/${id}/status`, {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ status: status.toLowerCase() }),
+  });
+
+  return res.json();
+};
 
 // Delete Class:
 export const deleteClass = async (id) => {
-  const res = await fetch(`${baseUrl}api/classes/${id}`, {
+  const res = await fetch(`${baseUrl}/api/classes/${id}`, {
     method: "DELETE",
     headers: {
       "content-type": "application/json",
     },
   });
+  return await res.json();
 };
 
 // Get featured classes
