@@ -45,20 +45,29 @@ export default function Navbar() {
           ? "/dashboard/admin"
           : "/auth/login";
   return (
-    <nav className="sticky bg-slate-100 top-0 z-50 ">
+    <nav className="sticky bg-slate-300 top-0 z-50 ">
       <div className="">
         <div className="flex items-center justify-between rounded-2xl border border-white/10 bg-white/5 px-6 py-3 backdrop-blur-md shadow-lg">
           {/* Logo */}
-          <Link href="/" className="p-0">
-            <Image
-              src={Logo}
-              alt="Logo"
-              width={80}
-              height={80}
-              priority
-              className="rounded-lg"
-            />
-          </Link>
+          <div className="flex items-center gap-3">
+            <Link href="/">
+              <Image
+                src={Logo}
+                alt="Logo"
+                width={80}
+                height={80}
+                priority
+                className="rounded-3xl"
+              />
+            </Link>
+            <h2 className="text-2xl font-bold -mt-4">
+              gym
+              <span className="bg-gradient-to-r from-[#192425] to-[#4EA618] bg-clip-text text-transparent  text-3xl font-extrabold">
+                S
+              </span>
+              tructor
+            </h2>
+          </div>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-10 ">

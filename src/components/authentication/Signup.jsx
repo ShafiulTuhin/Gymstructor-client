@@ -124,8 +124,8 @@ const Signup = () => {
               {...register("password", {
                 required: "Password cannot be empty",
                 minLength: {
-                  value: 8,
-                  message: "Password must be at least 8 characters",
+                  value: 6,
+                  message: "Password must be at least 6 characters",
                 },
                 pattern: {
                   value: /^(?=.*[a-z])(?=.*[A-Z]).+$/,
@@ -136,7 +136,7 @@ const Signup = () => {
 
             <span
               onClick={() => setIsPasswordShow(!isPasswordShow)}
-              className="absolute right-3 top-10 cursor-pointer text-gray-300"
+              className="absolute right-3 top-13 cursor-pointer text-gray-300"
             >
               {isPasswordShow ? <FaEye /> : <FaEyeSlash />}
             </span>
