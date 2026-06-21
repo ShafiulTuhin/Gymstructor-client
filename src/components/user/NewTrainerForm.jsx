@@ -35,6 +35,13 @@ const NewTrainerApplicationForm = ({ user }) => {
     }
   };
 
+  const handleBlockedUser = (e) => {
+    if (user?.status === "blocked") {
+      e.preventDefault();
+      toast.error("Action restricted by Admin");
+    }
+  };
+
   return (
     <div className="min-h-screen bg-[#071E22] px-5 py-10 text-white">
       <div className="mx-auto max-w-3xl rounded-2xl bg-[#0F3D3E] p-6 shadow-xl">
@@ -72,7 +79,8 @@ const NewTrainerApplicationForm = ({ user }) => {
           {/* SUBMIT */}
           <button
             type="submit"
-            className="w-full rounded-lg bg-[#4EA618] py-3 font-bold text-white transition hover:bg-green-700 disabled:opacity-50"
+            onClick={handleBlockedUser}
+            className="w-full rounded-lg bg-[#4EA618] py-3 font-bold text-white transition hover:bg-green-700 disabled:opacity-50 cursor-pointer"
           >
             Submit
           </button>

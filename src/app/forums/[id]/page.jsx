@@ -19,7 +19,7 @@ const ForumDetailsPage = async ({ params }) => {
       <div className="mx-auto lg:flex max-w-7xl items-start gap-6">
         {/* LEFT */}
         <div className="flex-1">
-          <ForumDetails forum={forum} />
+          <ForumDetails forum={forum} user={user} />
         </div>
 
         {/* RIGHT */}

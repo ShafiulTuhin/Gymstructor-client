@@ -25,7 +25,7 @@ const UserTable = ({ users }) => {
     const originalUser = users.find((c) => c._id === id);
 
     if (user.role === originalUser.role) {
-      toast.info("Nothing changed");
+      toast.info("Please select a role");
       return;
     }
 
@@ -63,8 +63,8 @@ const UserTable = ({ users }) => {
   return (
     <div className="min-h-screen p-6 bg-[#071E22] text-white">
       {/* <h1 className="text-2xl font-semibold mb-6">My Booked Classes</h1> */}
-      <div className="mb-6 flex items-center justify-between px-7 pt-4">
-        <div>
+      <div className="mb-6 md:flex items-center justify-between px-7 pt-4">
+        <div className="md:mb-0 mb-5 md:text-left text-center">
           <h2 className="text-2xl font-bold text-white">User Dashboard</h2>
           <p className="text-sm text-slate-400">
             Total User: {filteredUsers.length}
@@ -80,7 +80,7 @@ const UserTable = ({ users }) => {
             setSearch(e.target.value);
             setCurrentPage(1);
           }}
-          className="w-80 rounded-lg border border-slate-700 bg-[#0F3D3E] px-4 py-2 text-white placeholder:text-slate-500 focus:border-blue-500 focus:outline-none"
+          className="md:w-80 w-full rounded-lg border border-slate-700 bg-[#0F3D3E] px-4 py-2 text-white placeholder:text-slate-500 focus:border-blue-500 focus:outline-none"
         />
       </div>
       <div className="overflow-x-auto rounded-xl border border-gray-800">

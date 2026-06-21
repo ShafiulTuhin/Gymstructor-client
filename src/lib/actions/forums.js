@@ -56,3 +56,21 @@ export const deleteForum = async (id) => {
   });
   return res.json;
 };
+// Create comments
+export const createComment = async (forumId, user, text) => {
+  try {
+    const res = await fetch(`${baseUrl}/api/forums/${forumId}/comments`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        userId: user.id,
+        userName: user.name,
+        text,
+      }),
+    });
+
+    return await res.json();
+  } catch (err) {
+    return { success: false, error: err.message };
+  }
+};

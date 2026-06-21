@@ -53,26 +53,34 @@ export default function LikeUnlike({ user, forum }) {
   };
 
   return (
-    <div className="flex lg:mt-0 mt-5 gap-4">
-      <Button
-        onClick={() => handleVote("like")}
-        disabled={voted || loading}
-        className={`bg-[#4EA618] text-white px-6 rounded-lg ${
-          voted ? "opacity-40 cursor-not-allowed" : ""
-        }`}
-      >
-        Like
-      </Button>
-
-      <Button
-        onClick={() => handleVote("dislike")}
-        disabled={voted || loading}
-        className={`bg-red-500 text-white px-6 rounded-lg ${
-          voted ? "opacity-40 cursor-not-allowed" : ""
-        }`}
-      >
-        Dislike
-      </Button>
-    </div>
+    <>
+      <div className="flex lg:mt-0 mt-5 gap-4">
+        <Button
+          onClick={() => handleVote("like")}
+          disabled={voted || loading}
+          className={`bg-[#4EA618] text-white px-6 rounded-lg ${
+            voted ? "opacity-40 cursor-not-allowed" : ""
+          }`}
+        >
+          Like
+        </Button>
+        <Button
+          onClick={() => handleVote("dislike")}
+          disabled={voted || loading}
+          className={`bg-red-500 text-white px-6 rounded-lg ${
+            voted ? "opacity-40 cursor-not-allowed" : ""
+          }`}
+        >
+          Dislike
+        </Button>
+      </div>
+      <div className="w-[200px] text-gray-300">
+        <h2 className="text-2xl mb-4">Note:</h2>
+        <p>
+          Everybody is allowed to make a vote only, once you clicked like/unlike
+          it will be counted. Can't change your vote again
+        </p>
+      </div>
+    </>
   );
 }
