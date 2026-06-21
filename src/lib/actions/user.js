@@ -22,6 +22,12 @@ export const getNewTrainerApplication = async (applicantId) => {
   const data = await res.json();
   return data;
 };
+// Get trainer application(for Admin)
+export const getAllTrainerApplication = async () => {
+  const res = await fetch(`${baseUrl}/api/trainer/applications`);
+  const applications = await res.json();
+  return applications.applications;
+};
 
 export const createPaymentAndBooking = async ({
   sessionId,

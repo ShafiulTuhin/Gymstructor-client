@@ -43,6 +43,7 @@ const UserTable = ({ users }) => {
     setData(updated);
 
     await updateUserStatus(id, status);
+    toast.success(`Marked as ${status}`);
   };
 
   // Search option
@@ -120,7 +121,7 @@ const UserTable = ({ users }) => {
 
                   <td className="px-4 py-3">
                     <span
-                      className={`px-2 py-1 rounded-full text-xs font-medium ${
+                      className={`px-2 py-1 rounded-full text-xs font-medium  ${
                         user?.status === "active"
                           ? "bg-green-500/20 text-green-400"
                           : "bg-yellow-500/20 text-yellow-300"
@@ -134,26 +135,26 @@ const UserTable = ({ users }) => {
                     <div className="flex items-center justify-center gap-2">
                       <button
                         onClick={() => handleUpdateStatus(user._id, "active")}
-                        className="px-3 py-1 text-xs rounded-md bg-green-600 hover:bg-green-700 transition"
+                        className="px-3 py-1 text-xs rounded-md bg-green-600 hover:bg-green-700 transition cursor-pointer"
                       >
                         Active
                       </button>
 
                       <button
                         onClick={() => handleUpdateStatus(user._id, "blocked")}
-                        className="px-3 py-1 text-xs rounded-md bg-red-600 hover:bg-red-700 transition"
+                        className="px-3 py-1 text-xs rounded-md bg-red-600 hover:bg-red-700 transition cursor-pointer"
                       >
                         Block
                       </button>
                     </div>
                   </td>
-                  <td className="px-6 py-5 text-center">
+                  <td className="px-6 py-5 text-center cursor-pointer">
                     <select
                       value={user.role}
                       onChange={(e) =>
                         handleRoleChange(user._id, e.target.value)
                       }
-                      className="rounded-lg border border-slate-700 bg-[#173f40] px-4 py-2 text-sm font-medium text-white outline-none transition focus:border-blue-500"
+                      className="cursor-pointer rounded-lg border border-slate-700 bg-[#173f40] px-4 py-2 text-sm font-medium text-white outline-none transition focus:border-blue-500"
                     >
                       <option value="user">User</option>
                       <option value="trainer">Trainer</option>
@@ -164,7 +165,7 @@ const UserTable = ({ users }) => {
                   <td className="px-6 py-5 text-center">
                     <button
                       onClick={() => handleUpdateRole(user._id)}
-                      className="rounded-lg bg-blue-600 px-5 py-2 text-sm font-medium text-white transition hover:bg-blue-700 active:scale-95"
+                      className="cursor-pointer rounded-lg bg-blue-600 px-5 py-2 text-sm font-medium text-white transition hover:bg-blue-700 active:scale-95"
                     >
                       Update
                     </button>

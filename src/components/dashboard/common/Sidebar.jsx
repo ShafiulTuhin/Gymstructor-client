@@ -15,7 +15,8 @@ import { Button, Drawer } from "@heroui/react";
 import User from "./User";
 import Link from "next/link";
 import { GrFavorite } from "react-icons/gr";
-import { requireRole } from "@/lib/core/session";
+import { MdSettingsApplications } from "react-icons/md";
+import { FaChalkboardTeacher } from "react-icons/fa";
 
 const Sidebar = async ({ user }) => {
   // console.log(user);
@@ -85,14 +86,14 @@ const Sidebar = async ({ user }) => {
               label: "Users",
             },
             {
-              icon: Factory,
-              href: "/dashboard/admin/trainers",
-              label: "Trainers",
+              icon: MdSettingsApplications,
+              href: "/dashboard/admin/trainer-applications",
+              label: "Trainer Applications",
             },
             {
-              icon: Briefcase,
-              href: "/dashboard/admin/jobs",
-              label: "Jobs",
+              icon: FaChalkboardTeacher,
+              href: "/dashboard/admin/trainers",
+              label: "Trainers",
             },
 
             {
