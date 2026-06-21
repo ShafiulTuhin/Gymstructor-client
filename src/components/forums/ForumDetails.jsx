@@ -1,5 +1,9 @@
 "use client";
-import { createComment } from "@/lib/actions/forums";
+import {
+  createComment,
+  deleteComment,
+  // editComment,
+} from "@/lib/actions/forums";
 import Image from "next/image";
 import React, { useState } from "react";
 import { FaCalendarAlt, FaUserCircle } from "react-icons/fa";
@@ -9,34 +13,10 @@ const ForumDetails = ({ forum, user }) => {
   const { _id, title, image, authorName, description, createdAt } = forum;
   const [comment, setComment] = useState("");
   const [forumData, setForumData] = useState(forum);
+  const [editingId, setEditingId] = useState(null);
+  const [editText, setEditText] = useState("");
+  // console.log(user);
 
-  // const handleSubmit = async () => {
-  //   if (!comment.trim()) return;
-  //   if (user?.status === "blocked") {
-  //     toast.error("Action restricted by Admin");
-  //   }
-
-  //   try {
-  //     const res = await createComment(_id, user, comment);
-
-  //     if (res?.success) {
-  //       const newComment = res.data;
-
-  //       // 👇 update UI instantly (NO REFRESH)
-  //       setForumData((prev) => ({
-  //         ...prev,
-  //         comments: [...(prev.comments || []), newComment],
-  //       }));
-
-  //       setComment("");
-  //       toast.success("Comment added");
-  //     } else {
-  //       toast.error("Failed to add comment");
-  //     }
-  //   } catch (error) {
-  //     toast.error("Something went wrong");
-  //   }
-  // };
   const handleSubmit = async () => {
     if (!comment.trim()) return;
 
@@ -63,6 +43,62 @@ const ForumDetails = ({ forum, user }) => {
         toast.error("Failed to add comment");
       }
     } catch (error) {
+      toast.error("Something went wrong");
+    }
+  };
+  const editComment = async (forumId, commentId, userId, text) => {
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_URL}/api/forums/${forumId}/comments/${commentId}`,
+      {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ userId, text }),
+      },
+    );
+
+    return res.json(); // ✅ IMPORTANT
+  };
+  const handleEdit = async (commentId) => {
+    if (!editText.trim()) return;
+
+    try {
+      const res = await editComment(_id, commentId, user.id, editText);
+
+      if (res?.success) {
+        setForumData((prev) => ({
+          ...prev,
+          comments: prev.comments.map((c) =>
+            c._id === commentId ? { ...c, text: editText } : c,
+          ),
+        }));
+
+        setEditingId(null);
+        setEditText("");
+        toast.success("Comment updated");
+      } else {
+        toast.error(res?.message || "Update failed");
+      }
+    } catch (err) {
+      console.error(err);
+      toast.error("Something went wrong");
+    }
+  };
+  const handleDelete = async (commentId) => {
+    try {
+      const res = await deleteComment(_id, commentId, user.id);
+
+      if (res?.success) {
+        setForumData((prev) => ({
+          ...prev,
+          comments: prev.comments.filter((c) => c._id !== commentId),
+        }));
+
+        toast.success("Comment deleted");
+      } else {
+        toast.error(res?.message || "Delete failed");
+      }
+    } catch (err) {
+      console.error(err);
       toast.error("Something went wrong");
     }
   };
@@ -115,7 +151,7 @@ const ForumDetails = ({ forum, user }) => {
 
                 {/* Previous Comments (UI only) */}
                 <div className="mt-6 space-y-3">
-                  {forumData?.comments?.length > 0 ? (
+                  {/* {forumData?.comments?.length > 0 ? (
                     [...forumData.comments]
                       .reverse()
                       .slice(0, 3)
@@ -128,6 +164,77 @@ const ForumDetails = ({ forum, user }) => {
                           <span className="text-xs text-gray-400">
                             by {c.userName}
                           </span>
+                        </div>
+                      ))
+                  ) : (
+                    <p className="text-gray-400 text-sm">No comments yet</p>
+                  )} */}
+                  {forumData?.comments?.length > 0 ? (
+                    [...forumData.comments]
+                      .slice()
+                      .reverse()
+                      .slice(0, 3)
+                      .map((c) => (
+                        <div
+                          key={c._id}
+                          className="bg-[#0F3D3E] p-3 rounded-lg border border-white/10"
+                        >
+                          {/* TEXT OR EDIT MODE */}
+                          {editingId === c._id ? (
+                            <div className="flex flex-col gap-2">
+                              <textarea
+                                value={editText}
+                                onChange={(e) => setEditText(e.target.value)}
+                                className="w-full p-2 rounded bg-[#071E22] text-white"
+                              />
+
+                              <div className="flex gap-2">
+                                <button
+                                  onClick={() => handleEdit(c._id)}
+                                  className="px-3 py-1 bg-[#4EA618] text-white rounded"
+                                >
+                                  Save
+                                </button>
+
+                                <button
+                                  onClick={() => setEditingId(null)}
+                                  className="px-3 py-1 bg-gray-600 text-white rounded"
+                                >
+                                  Cancel
+                                </button>
+                              </div>
+                            </div>
+                          ) : (
+                            <p className="text-white text-sm">{c.text}</p>
+                          )}
+
+                          <div className="flex justify-between items-center mt-2">
+                            <span className="text-xs text-gray-400">
+                              by {c.userName}
+                            </span>
+
+                            {/* OWNER ONLY ACTIONS */}
+                            {String(c.userId) === String(user?.id) && (
+                              <div className="flex gap-2 text-xs">
+                                <button
+                                  onClick={() => {
+                                    setEditingId(c._id);
+                                    setEditText(c.text);
+                                  }}
+                                  className="text-blue-400"
+                                >
+                                  Edit
+                                </button>
+
+                                <button
+                                  onClick={() => handleDelete(c._id)}
+                                  className="text-red-400"
+                                >
+                                  Delete
+                                </button>
+                              </div>
+                            )}
+                          </div>
                         </div>
                       ))
                   ) : (

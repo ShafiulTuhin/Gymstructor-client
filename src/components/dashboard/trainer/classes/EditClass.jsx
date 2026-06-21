@@ -26,13 +26,46 @@ const EditClass = ({ myClass }) => {
   const scheduleData = myClass?.schedule || [];
   const router = useRouter();
 
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+
+  //   const formData = new FormData(e.currentTarget);
+  //   const updatedClass = Object.fromEntries(formData.entries());
+
+  //   await updateClass(_id, updatedClass);
+  //   toast.success("Your change has been updated");
+  //   router.push("/dashboard/trainer/classes");
+  // };
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     const formData = new FormData(e.currentTarget);
-    const updatedClass = Object.fromEntries(formData.entries());
+
+    const updatedClass = {
+      className: formData.get("className"),
+      category: formData.get("category"),
+      difficulty: formData.get("difficulty"),
+      duration: formData.get("duration"),
+      price: formData.get("price"),
+      description: formData.get("description"),
+    };
+
+    // ✅ build schedule manually
+    const schedule = [];
+
+    scheduleData.forEach((_, index) => {
+      const day = formData.get(`schedule[${index}].day`);
+      const time = formData.get(`schedule[${index}].time`);
+
+      if (day && time) {
+        schedule.push({ day, time });
+      }
+    });
+
+    updatedClass.schedule = schedule;
 
     await updateClass(_id, updatedClass);
+
     toast.success("Your change has been updated");
     router.push("/dashboard/trainer/classes");
   };
@@ -143,7 +176,7 @@ const EditClass = ({ myClass }) => {
                       </div>
                     </div>
                   </Fieldset>
-                  {/* SCHEDULE */}
+
                   {/* SCHEDULE */}
                   <div>
                     <Label className="text-white text-sm mb-2 block">
@@ -233,7 +266,7 @@ const EditClass = ({ myClass }) => {
               <Button
                 type="submit"
                 form="edit-class-form"
-                className="bg-gradient-to-r from-[#4EA618] to-[#192425] text-white rounded-lg px-5"
+                className="bg-[#4EA618] hover:bg-green-600 transition  text-white rounded-lg px-5"
                 slot="close"
               >
                 Update Class

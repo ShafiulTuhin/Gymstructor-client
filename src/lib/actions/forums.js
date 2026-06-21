@@ -74,3 +74,35 @@ export const createComment = async (forumId, user, text) => {
     return { success: false, error: err.message };
   }
 };
+// Edit comment
+export const editComment = async (forumId, commentId, userId, text) => {
+  const res = await fetch(`/api/forums/${forumId}/comments/${commentId}`, {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      userId,
+      text,
+    }),
+  });
+
+  return res.json();
+};
+// Delete comment
+export const deleteComment = async (forumId, commentId, userId) => {
+  const res = await fetch(
+    `http://localhost:5000/api/forums/${forumId}/comments/${commentId}`,
+    {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        userId,
+      }),
+    },
+  );
+
+  return await res.json();
+};
