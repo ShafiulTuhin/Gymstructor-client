@@ -108,14 +108,14 @@ export default function Navbar() {
                     Welcome!
                   </p>
 
-                  <p className="font-bold text-sm bg-gradient-to-r from-[#4EA618] to-[#192425] bg-clip-text text-transparent">
+                  <p className="font-bold text-sm bg-[#4EA618] hover:bg-green-600 transition bg-clip-text text-transparent">
                     {user?.name}
                   </p>
                 </div>
 
                 <Button
                   onClick={handleLogout}
-                  className="bg-gradient-to-r from-[#4EA618] to-[#192425] text-white rounded-lg"
+                  className="bg-[#4EA618] hover:bg-green-600 transition text-white rounded-lg"
                 >
                   Logout
                 </Button>
@@ -131,7 +131,7 @@ export default function Navbar() {
                 <Link href="/auth/signup">
                   <Button
                     radius="lg"
-                    className="bg-gradient-to-r from-[#4EA618] to-[#192425]  text-white rounded-lg"
+                    className="bg-[#4EA618] hover:bg-green-600 transition  text-white rounded-lg"
                   >
                     Signup
                   </Button>
@@ -215,7 +215,7 @@ export default function Navbar() {
                       Welcome!
                     </p>
 
-                    <p className="font-bold text-sm bg-gradient-to-r from-[#4EA618] to-[#192425] bg-clip-text text-transparent">
+                    <p className="font-bold text-sm bg-[#4EA618] hover:bg-green-600 transition bg-clip-text text-transparent">
                       {user?.name}
                     </p>
                   </div>
@@ -223,7 +223,7 @@ export default function Navbar() {
                   <Button
                     onClick={handleLogout}
                     className="
-                bg-gradient-to-r from-[#4EA618] to-[#192425]"
+                bg-[#4EA618] hover:bg-green-600 transition"
                   >
                     Logout
                   </Button>
@@ -239,7 +239,7 @@ export default function Navbar() {
                   <Link href="/auth/signup">
                     <Button
                       radius="lg"
-                      className="bg-gradient-to-r from-[#4EA618] to-[#192425] text-white"
+                      className="bg-[#4EA618] hover:bg-green-600 transition text-white"
                     >
                       Signup
                     </Button>

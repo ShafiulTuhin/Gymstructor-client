@@ -49,6 +49,16 @@ export const createPaymentAndBooking = async ({
   const data = await res.json();
   return data;
 };
+// Update trainer application:
+export const updateTrainerApplication = async (id, payload) => {
+  const res = await fetch(`${baseUrl}/api/trainer/applications/${id}`, {
+    method: "PATCH",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(payload),
+  });
+
+  return res.json();
+};
 
 // Get payment and booking details for user
 export const getBookingAndPaymentDetails = async (userId) => {
