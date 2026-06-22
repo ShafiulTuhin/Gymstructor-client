@@ -1,23 +1,33 @@
 "use server";
 
+import { getHeader } from "../core/server";
+
 const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
 
-export const createForum = async (newFOrumData) => {
+export const createForum = async (newForumData) => {
   const res = await fetch(`${baseUrl}/api/forums`, {
     method: "POST",
     headers: {
       "content-type": "application/json",
+      ...(await getHeader()),
     },
-    body: JSON.stringify(newFOrumData),
+    body: JSON.stringify(newForumData),
   });
 
   const data = await res.json();
   return data;
 };
 
-// Get all classes
+// Get all Forums
 export const getAllForums = async () => {
   const res = await fetch(`${baseUrl}/api/forums`);
+  return res.json();
+};
+// Get all forums for admin:
+export const getAdminForums = async () => {
+  const res = await fetch(`${baseUrl}/api/admin/forums`, {
+    headers: { ...(await getHeader()) },
+  });
   return res.json();
 };
 

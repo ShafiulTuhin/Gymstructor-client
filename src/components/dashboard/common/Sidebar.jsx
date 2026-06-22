@@ -18,6 +18,7 @@ import { GrArticle, GrFavorite, GrTransaction } from "react-icons/gr";
 import { MdSettingsApplications } from "react-icons/md";
 import { FaChalkboardTeacher } from "react-icons/fa";
 import { GiReturnArrow } from "react-icons/gi";
+import { requireOrgRole } from "better-auth/api";
 
 const Sidebar = async ({ user }) => {
   const navItems =

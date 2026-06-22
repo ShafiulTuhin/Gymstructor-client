@@ -1,11 +1,11 @@
 import ForumsTable from "@/components/dashboard/admin/ForumsTable";
-import { getAllForums } from "@/lib/actions/forums";
+import { getAdminForums, getAllForums } from "@/lib/actions/forums";
 import { getUserSession } from "@/lib/core/session";
 
 import React from "react";
 
 const AdminForumPage = async () => {
-  const forums = await getAllForums();
+  const forums = await getAdminForums();
   const user = await getUserSession();
 
   return (

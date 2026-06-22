@@ -1,11 +1,13 @@
-import { getBookingAndPaymentDetails } from "@/lib/actions/user";
+import { getBookingDetails } from "@/lib/actions/user";
 import { getUserSession } from "@/lib/core/session";
 import React from "react";
 import Link from "next/link";
 
 const MyBookingsClasses = async () => {
   const user = await getUserSession();
-  const result = await getBookingAndPaymentDetails(user?.id);
+  const result = await getBookingDetails(user?.id);
+  console.log(result);
+
   const myBookings = result.data || [];
 
   return (
@@ -47,18 +49,18 @@ const MyBookingsClasses = async () => {
                   </td>
 
                   <td className="px-4 py-3 text-gray-300">
-                    ${booking?.amount || 0}
+                    ${booking?.price || 0}
                   </td>
 
                   <td className="px-4 py-3">
                     <span
                       className={`px-2 py-1 rounded-full text-xs font-medium ${
-                        booking?.paymentStatus === "succeeded"
+                        booking?.bookingStatus === "confirmed"
                           ? "bg-green-500/20 text-green-400"
                           : "bg-yellow-500/20 text-yellow-300"
                       }`}
                     >
-                      {booking?.paymentStatus || "pending"}
+                      {booking?.bookingStatus || "pending"}
                     </span>
                   </td>
 

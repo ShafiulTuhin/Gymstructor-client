@@ -1,5 +1,6 @@
 "use client";
 
+import { Button } from "@heroui/react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 
@@ -37,20 +38,11 @@ export default function Error({ error, reset }) {
             {error.message}
           </div>
         )}
-
-        {/* Button */}
-        {/* <Link href={"/"}>
-          <button className="mt-6 w-full py-3 rounded-xl bg-[#4EA618] text-white font-semibold hover:bg-green-600 transition cursor-pointer">
+        <Link href={"/"}>
+          <Button className="cursor=pointer mt-6 w-full py-3 rounded-xl bg-[#4EA618] text-white font-semibold hover:bg-green-600 transition cursor-pointer">
             Back To Home
-          </button>
-        </Link> */}
-        <button
-          // onClick={() => router.push("/")}
-          href={"/"}
-          className="cursor=pointer mt-6 w-full py-3 rounded-xl bg-[#4EA618] text-white font-semibold hover:bg-green-600 transition cursor-pointer"
-        >
-          Back To Home
-        </button>
+          </Button>
+        </Link>
 
         {/* Footer */}
         <p className="text-xs text-gray-500 mt-4 relative">

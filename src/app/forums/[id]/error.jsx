@@ -1,8 +1,10 @@
 "use client";
 
+import { Button } from "@heroui/react";
+import Link from "next/link";
 import { FiAlertTriangle, FiRefreshCw } from "react-icons/fi";
 
-export default function Error({ error, reset }) {
+export default function Error({ error }) {
   return (
     <div className="min-h-screen bg-[#071E22] flex items-center justify-center px-4">
       <div className="w-full max-w-md rounded-2xl border border-[#173f40] bg-gradient-to-b from-[#0F3D3E] to-[#071E22] shadow-2xl p-8 text-center relative overflow-hidden">
@@ -35,13 +37,12 @@ export default function Error({ error, reset }) {
         )}
 
         {/* Button */}
-        <button
-          onClick={() => reset()}
-          className="mt-6 w-full py-3 rounded-xl bg-[#4EA618] text-white font-semibold hover:bg-green-600 transition flex items-center justify-center gap-2"
-        >
-          <FiRefreshCw className="text-sm" />
-          Try Again
-        </button>
+        <Link href={"/"}>
+          <Button className="cursor-pointer mt-6 w-full py-3 rounded-xl bg-[#4EA618] text-white font-semibold hover:bg-green-600 transition flex items-center justify-center gap-2">
+            <FiRefreshCw className="text-sm" />
+            Back to Home
+          </Button>
+        </Link>
 
         {/* Footer */}
         <p className="text-xs text-gray-500 mt-4 relative">

@@ -1,7 +1,7 @@
 import ClassDetails from "@/components/dashboard/trainer/classes/ClassDetails";
 import AddToFavorite from "@/components/user/AddToFavorite";
 import { getSingleClass } from "@/lib/actions/classes";
-import { getBookingAndPaymentDetails } from "@/lib/actions/user";
+import { getBookingDetails } from "@/lib/actions/user";
 import { getUserSession } from "@/lib/core/session";
 import { Button } from "@heroui/react";
 import Link from "next/link";
@@ -14,7 +14,7 @@ const DetailsClassPage = async ({ params }) => {
   const { id } = await params;
   const myClass = await getSingleClass(id);
   const user = await getUserSession();
-  const bookings = await getBookingAndPaymentDetails(user?.id);
+  const bookings = await getBookingDetails(user?.id);
   const myBookings = bookings.data;
   const isBooked = myBookings.find(
     (b) => b.userId === user?.id && b.classId === myClass._id,

@@ -1,5 +1,7 @@
 "use server";
 
+import { getHeader } from "../core/server";
+
 const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
 
 export const createClass = async (newClassData) => {
@@ -7,6 +9,7 @@ export const createClass = async (newClassData) => {
     method: "POST",
     headers: {
       "content-type": "application/json",
+      ...(await getHeader()),
     },
     body: JSON.stringify(newClassData),
   });
@@ -16,25 +19,33 @@ export const createClass = async (newClassData) => {
 };
 
 export const getAllClasses = async () => {
-  const res = await fetch(`${baseUrl}/api/classes?status=approved`);
+  const res = await fetch(`${baseUrl}/api/classes?status=approved`, {});
   return res.json();
 };
 // Get admin classes
 export const getAdminClasses = async () => {
-  const res = await fetch(`${baseUrl}/api/classes`, {
+  const res = await fetch(`${baseUrl}/api/admin/classes`, {
     cache: "no-store",
+
+    headers: { ...(await getHeader()) },
   });
   return res.json();
 };
 
 // Get trainer all Classes
 export const getTrainerClasses = async (trainerId) => {
-  const res = await fetch(`${baseUrl}/api/classes/trainer/${trainerId}`);
+  const res = await fetch(`${baseUrl}/api/classes/trainer/${trainerId}`, {
+    headers: { ...(await getHeader()) },
+  });
   return res.json();
 };
 // Get Single Class details
 export const getSingleClass = async (id) => {
-  const res = await fetch(`${baseUrl}/api/classes/single/${id}`);
+  const res = await fetch(`${baseUrl}/api/classes/single/${id}`, {
+    cache: "no-store",
+
+    headers: { ...(await getHeader()) },
+  });
   const myClass = await res.json();
   return myClass;
 };

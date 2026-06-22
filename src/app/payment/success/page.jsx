@@ -1,4 +1,4 @@
-import { createPaymentAndBooking } from "@/lib/actions/user";
+import { getHeader } from "@/lib/core/server";
 import { stripe } from "@/lib/stripe";
 import Link from "next/link";
 import { redirect } from "next/navigation";
@@ -25,6 +25,7 @@ export default async function Success({ searchParams }) {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
+      ...(await getHeader()),
     },
     body: JSON.stringify({
       sessionId: session.id,
