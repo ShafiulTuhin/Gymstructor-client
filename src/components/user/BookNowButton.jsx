@@ -13,7 +13,7 @@ export default function BookNowButton({ user, myClass, isBooked }) {
 
   return (
     <div className="flex gap-4">
-      {isBooked ? (
+      {isBooked && isBooked ? (
         <Button
           disabled
           className="bg-gray-600 text-white px-10 py-5 rounded-lg font-semibold cursor-not-allowed"

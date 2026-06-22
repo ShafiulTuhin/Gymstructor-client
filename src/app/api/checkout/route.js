@@ -17,7 +17,9 @@ export async function POST(req) {
 
     const myClass = await getSingleClass(classId);
     const amount = Number(myClass.price);
-
+    // console.log("myClass.price =", amount);
+    // console.log("typeof =", typeof myClass.price);
+    // console.log("unit_amount =", parseInt(myClass.price * 100, 10));
     const session = await stripe.checkout.sessions.create({
       customer_email: user?.email,
       mode: "payment",
@@ -29,7 +31,7 @@ export async function POST(req) {
         classId: myClass._id?.toString(),
         className: myClass?.className,
         trainerName: myClass?.trainerName,
-        price: String(myClass.price),
+        price: Number(myClass.price),
       },
 
       line_items: [

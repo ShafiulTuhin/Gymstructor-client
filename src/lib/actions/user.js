@@ -70,25 +70,13 @@ export const getBookingDetails = async (userId) => {
   const res = await fetch(`${baseUrl}/api/bookings/${userId}`, {
     headers: { ...(await getHeader()) },
   });
-
-  // 1. Get the response as plain text first to see what it actually is
-  const textData = await res.text();
-  console.log("RAW RESPONSE FROM SERVER FOR PAYMENTS:", textData);
-
-  // 2. Try parsing it manually to catch the exact moment it fails
-  try {
-    return JSON.parse(textData);
-  } catch (err) {
-    console.error(
-      "This is the endpoint that broke! Failed parsing:",
-      baseUrl + `/api/bookings/${userId}`,
-    );
-    return { error: true };
-  }
+  return res.json();
 };
 // Get payment and booking details for admin:
 export const getAllBookings = async () => {
-  const res = await fetch(`${baseUrl}/api/payments`);
+  const res = await fetch(`${baseUrl}/api/bookings`, {
+    headers: { ...(await getHeader()) },
+  });
   const bookings = await res.json();
   return bookings.data;
 };
@@ -105,9 +93,8 @@ export const getAllUser = async () => {
 export const updateUserRole = async (userId, role) => {
   const res = await fetch(`${baseUrl}/api/users/${userId}/role`, {
     method: "PATCH",
-    headers: { "Content-Type": "application/json" },
+    headers: { "Content-Type": "application/json", ...(await getHeader()) },
     body: JSON.stringify({ role }),
-    headers: { ...(await getHeader()) },
   });
   revalidatePath("/dashboard/admin/users");
   return res.json();
@@ -116,9 +103,8 @@ export const updateUserRole = async (userId, role) => {
 export const updateUserStatus = async (userId, status) => {
   const res = await fetch(`${baseUrl}/api/users/${userId}/status`, {
     method: "PATCH",
-    headers: { "Content-Type": "application/json" },
+    headers: { "Content-Type": "application/json", ...(await getHeader()) },
     body: JSON.stringify({ status }),
-    headers: { ...(await getHeader()) },
   });
   revalidatePath("/dashboard/admin/users");
   return res.json();

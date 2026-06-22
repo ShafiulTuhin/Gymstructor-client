@@ -47,8 +47,7 @@ const UnauthorizedPage = () => {
 
           {/* Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center mt-10">
-            <Link href={"/jobs"}>
-              {" "}
+            <Link href={"/j"}>
               <Button
                 color="primary"
                 size="lg"

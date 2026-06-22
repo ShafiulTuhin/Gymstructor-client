@@ -3,8 +3,7 @@ import AddToFavorite from "@/components/user/AddToFavorite";
 import { getSingleClass } from "@/lib/actions/classes";
 import { getBookingDetails } from "@/lib/actions/user";
 import { getUserSession } from "@/lib/core/session";
-import { Button } from "@heroui/react";
-import Link from "next/link";
+
 import React from "react";
 import Error from "./error";
 import { toast } from "react-toastify";
@@ -15,7 +14,10 @@ const DetailsClassPage = async ({ params }) => {
   const myClass = await getSingleClass(id);
   const user = await getUserSession();
   const bookings = await getBookingDetails(user?.id);
-  const myBookings = bookings.data;
+
+  const myBookings = bookings.data || [];
+  console.log(myBookings);
+
   const isBooked = myBookings.find(
     (b) => b.userId === user?.id && b.classId === myClass._id,
   );

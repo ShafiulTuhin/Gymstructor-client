@@ -49,7 +49,7 @@ const MyBookingsClasses = async () => {
                   </td>
 
                   <td className="px-4 py-3 text-gray-300">
-                    ${booking?.price || 0}
+                    ${booking?.price / 100 || 0}.00
                   </td>
 
                   <td className="px-4 py-3">

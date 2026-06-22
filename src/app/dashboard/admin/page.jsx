@@ -11,6 +11,7 @@ const AdminHomepage = async () => {
   const adminClasses = await getAdminClasses();
   const classes = adminClasses.classes;
   const bookedClasses = await getAllBookings();
+  console.log(bookedClasses);
 
   return (
     <div className="space-y-8">

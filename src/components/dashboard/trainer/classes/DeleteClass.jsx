@@ -11,13 +11,24 @@ const DeleteClass = ({ myClass }) => {
   const router = useRouter();
 
   const deleteSingleClass = async () => {
-    const res = deleteClass(myClass?._id);
+    try {
+      const res = await deleteClass(myClass?._id);
 
-    toast.success(`${myClass.className} successfully deleted`);
+      if (!res?.success && !res?.acknowledged) {
+        toast.error("Delete failed");
+        return;
+      }
 
-    setTimeout(() => {
-      router.push("/dashboard/trainer/classes");
-    }, 1000);
+      toast.success(`${myClass.className} successfully deleted`);
+
+      setTimeout(() => {
+        router.push("/dashboard/trainer/classes");
+        router.refresh(); // important
+      }, 500);
+    } catch (error) {
+      console.error(error);
+      toast.error("Something went wrong");
+    }
   };
   return (
     <div>

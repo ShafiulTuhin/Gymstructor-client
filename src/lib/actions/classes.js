@@ -19,7 +19,7 @@ export const createClass = async (newClassData) => {
 };
 
 export const getAllClasses = async () => {
-  const res = await fetch(`${baseUrl}/api/classes?status=approved`, {});
+  const res = await fetch(`${baseUrl}/api/classes?status=approved`);
   return res.json();
 };
 // Get admin classes
@@ -55,6 +55,7 @@ export const updateClass = async (id, updatedClass) => {
     method: "PATCH",
     headers: {
       "Content-Type": "application/json",
+      ...(await getHeader()),
     },
     body: JSON.stringify(updatedClass),
   });
@@ -67,6 +68,7 @@ export const updateClassStatus = async (id, status) => {
     method: "PATCH",
     headers: {
       "Content-Type": "application/json",
+      ...(await getHeader()),
     },
     body: JSON.stringify({ status: status.toLowerCase() }),
   });
@@ -80,6 +82,7 @@ export const deleteClass = async (id) => {
     method: "DELETE",
     headers: {
       "content-type": "application/json",
+      ...(await getHeader()),
     },
   });
   return await res.json();

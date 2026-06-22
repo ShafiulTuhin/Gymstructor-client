@@ -33,7 +33,9 @@ export const getAdminForums = async () => {
 
 // Get author's all forums
 export const getAuthorForums = async (authorId) => {
-  const res = await fetch(`${baseUrl}/api/forums/author/${authorId}`);
+  const res = await fetch(`${baseUrl}/api/forums/author/${authorId}`, {
+    headers: { ...(await getHeader()) },
+  });
   return res.json();
 };
 
@@ -49,6 +51,7 @@ export const updateForum = async (id, updatedForum) => {
     method: "PATCH",
     headers: {
       "Content-Type": "application/json",
+      ...(await getHeader()),
     },
     body: JSON.stringify(updatedForum),
   });
@@ -62,9 +65,11 @@ export const deleteForum = async (id) => {
     method: "DELETE",
     headers: {
       "content-type": "application/json",
+      ...(await getHeader()),
     },
   });
-  return res.json;
+
+  return await res.json(); // ✅ call the function
 };
 // Create comments
 export const createComment = async (forumId, user, text) => {

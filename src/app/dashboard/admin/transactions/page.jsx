@@ -33,13 +33,13 @@ const TransactionPage = async () => {
               {transactions.map((transaction, index) => (
                 <tr
                   key={transaction._id}
-                  className="text-gray-300 border-b border-gray-600"
+                  className="text-gray-300 border-b border-gray-600 space-y-3"
                 >
                   <td className="text-left">{index + 1}</td>
                   <td className="text-left">{transaction.userName}</td>
                   <td className="text-left">{transaction.trainerName}</td>
                   <td className="text-left">{transaction.className}</td>
-                  <td className="text-left">${transaction.amount}</td>
+                  <td className="text-left">${transaction.amount / 100}.00</td>
                   <td className="text-left">
                     {new Date(transaction.createdAt).toLocaleDateString()}
                   </td>

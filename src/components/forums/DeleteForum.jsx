@@ -1,6 +1,7 @@
 "use client";
 
 import { deleteForum } from "@/lib/actions/forums";
+
 import { AlertDialog, Button } from "@heroui/react";
 import { useRouter } from "next/navigation";
 import React from "react";
@@ -10,26 +11,52 @@ import { toast } from "react-toastify";
 const DeleteForum = ({ myForum, user }) => {
   const router = useRouter();
 
+  // const delForum = async () => {
+  //   // const res = await fetch(
+  //   //   `${process.env.NEXT_PUBLIC_BASE_URL}/api/forums/${myForum._id}`,
+  //   //   {
+  //   //     method: "DELETE",
+  //   //     headers: {
+  //   //       "content-type": "application/json",
+  //   //       ...(await getHeader()),
+  //   //     },
+  //   //   },
+  //   // );
+  //   // await res.json();
+  //   await deleteForum(myForum._id);
+
+  //   toast.success(`${myForum.title} successfully deleted`);
+
+  //   setTimeout(() => {
+  //     user?.role === "trainer"
+  //       ? router.push("/dashboard/trainer/forums")
+  //       : router.push("/dashboard/admin/forums");
+  //   }, 1000);
+  // };
   const delForum = async () => {
-    const res = await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_URL}/api/forums/${myForum._id}`,
-      {
-        method: "DELETE",
-        headers: {
-          "content-type": "application/json",
-        },
-      },
-    );
-    await res.json();
-    // await deleteForum(myForum._id);
+    try {
+      const res = await deleteForum(myForum._id);
 
-    toast.success(`${myForum.title} successfully deleted`);
+      if (!res?.success && !res?.acknowledged) {
+        toast.error("Delete failed");
+        return;
+      }
 
-    setTimeout(() => {
-      user?.role === "trainer"
-        ? router.push("/dashboard/trainer/forums")
-        : router.push("/dashboard/admin/forums");
-    }, 1000);
+      toast.success(`${myForum.title} successfully deleted`);
+
+      setTimeout(() => {
+        if (user?.role === "trainer") {
+          router.push("/dashboard/trainer/forums");
+        } else {
+          router.push("/dashboard/admin/forums");
+        }
+
+        router.refresh();
+      }, 1000);
+    } catch (error) {
+      console.error(error);
+      toast.error("Something went wrong");
+    }
   };
   return (
     <div>
