@@ -133,7 +133,7 @@ const CreateForum = ({ user }) => {
           <button
             type="submit"
             disabled={uploading}
-            className="w-full rounded-lg bg-[#4EA618] py-3 font-bold text-white transition hover:bg-green-700 disabled:opacity-50"
+            className="cursor-pointer w-full rounded-lg bg-[#4EA618] py-3 font-bold text-white transition hover:bg-green-700 disabled:opacity-50"
           >
             {uploading ? "Uploading..." : "Create Forum"}
           </button>

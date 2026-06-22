@@ -6,7 +6,6 @@ import { useEffect, useState } from "react";
 import { FiEye, FiSearch } from "react-icons/fi";
 
 const AllClasses = ({ classes }) => {
-  // initial data from server (optional fallback)
   const [data, setData] = useState(classes || []);
 
   const [search, setSearch] = useState("");
@@ -114,7 +113,7 @@ const AllClasses = ({ classes }) => {
               ))}
             </div>
             {/* ================= Gym Feature Card ================= */}
-            <div className="mt-12 rounded-2xl border border-[#173f40] bg-gradient-to-b from-[#0F3D3E] to-[#071E22]  p-5 shadow-lg">
+            <div className="sm:block hidden mt-12 rounded-2xl border border-[#173f40] bg-gradient-to-b from-[#0F3D3E] to-[#071E22]  p-5 shadow-lg">
               <h3 className="text-white text-lg font-semibold mb-3">
                 💪 Daily Fitness Tip
               </h3>
@@ -132,7 +131,7 @@ const AllClasses = ({ classes }) => {
                 Weekly progress motivation
               </p>
             </div>
-            <div className="mt-8 rounded-2xl border border-[#173f40] bg-gradient-to-b from-[#0F3D3E] to-[#071E22] p-5 shadow-lg overflow-hidden">
+            <div className="sm:block hidden mt-8 rounded-2xl border border-[#173f40] bg-gradient-to-b from-[#0F3D3E] to-[#071E22] p-5 shadow-lg overflow-hidden">
               <h3 className="text-white text-lg font-semibold mb-2">
                 🏋️ Training Mode
               </h3>
@@ -142,7 +141,7 @@ const AllClasses = ({ classes }) => {
               </p>
 
               {/* ANIMATION */}
-              <div className="flex justify-center items-center h-32 mt-5">
+              <div className="flex justify-center items-center h-32 mt-5 sm:block hidden">
                 <div className="relative w-20 h-20">
                   {/* body */}
                   <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-6 h-12 bg-[#4EA618] rounded-md animate-bounce"></div>

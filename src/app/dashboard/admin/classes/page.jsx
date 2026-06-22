@@ -3,8 +3,8 @@ import { getAdminClasses } from "@/lib/actions/classes";
 import React from "react";
 
 const AdminClassesPage = async () => {
-  const classes = await getAdminClasses();
-  console.log(classes);
+  const data = await getAdminClasses();
+  const classes = data.classes;
 
   return (
     <div>

@@ -2,12 +2,14 @@ import Profile from "@/components/dashboard/Profile";
 import { getAdminClasses } from "@/lib/actions/classes";
 import { getAllBookings, getAllUser } from "@/lib/actions/user";
 import { getUserSession } from "@/lib/core/session";
+import { admin } from "better-auth/plugins";
 import { FaUsers, FaDumbbell, FaCalendarCheck } from "react-icons/fa";
 
 const AdminHomepage = async () => {
   const user = await getUserSession();
   const users = await getAllUser();
-  const classes = await getAdminClasses();
+  const adminClasses = await getAdminClasses();
+  const classes = adminClasses.classes;
   const bookedClasses = await getAllBookings();
 
   return (

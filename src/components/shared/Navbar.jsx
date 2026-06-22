@@ -45,9 +45,9 @@ export default function Navbar() {
           ? "/dashboard/admin"
           : "/auth/login";
   return (
-    <nav className="sticky bg-slate-300 top-0 z-50 ">
-      <div className="">
-        <div className="flex items-center justify-between rounded-2xl border border-white/10 bg-white/5 px-6 py-3 backdrop-blur-md shadow-lg">
+    <nav className="sticky bg-slate-300 top-0 z-50">
+      <div className="md:px-10 px-4">
+        <div className="flex items-center justify-between rounded-2xl py-3 lg:px-0 px-4">
           {/* Logo */}
           <div className="flex items-center gap-3">
             <Link href="/">
@@ -55,12 +55,12 @@ export default function Navbar() {
                 src={Logo}
                 alt="Logo"
                 width={80}
-                height={80}
+                height={60}
                 priority
                 className="rounded-3xl"
               />
             </Link>
-            <h2 className="text-2xl font-bold -mt-4">
+            <h2 className="text-2xl font-bold -mt-2">
               gym
               <span className="bg-gradient-to-r from-[#192425] to-[#4EA618] bg-clip-text text-transparent  text-3xl font-extrabold">
                 S
@@ -104,13 +104,13 @@ export default function Navbar() {
                 <Spinner size="sm" />
               </div>
             ) : user ? (
-              <div className="flex gap-4 items-center">
+              <div className="flex gap-4 items-center ">
                 <Image
                   src={user?.image || Avator}
                   alt={user?.name}
                   width={40}
                   height={40}
-                  className="rounded-full"
+                  className="rounded-full w-12 h-12"
                 />
                 <div>
                   <p className="bg-gradient-to-r from-[#192425] to-[#4EA618] bg-clip-text text-transparent font-bold ">

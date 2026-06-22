@@ -34,12 +34,13 @@ const DeleteForum = ({ myForum, user }) => {
   return (
     <div>
       <AlertDialog>
-        <Button className="flex items-center justify-center rounded-lg bg-red-500 p-2 text-white transition hover:bg-red-600">
+        <Button className="flex gap-2 items-center justify-center rounded-lg bg-red-500 p-2 text-white transition hover:bg-red-600">
           <FiTrash2 />
+          Delete
         </Button>
         <AlertDialog.Backdrop>
           <AlertDialog.Container>
-            <AlertDialog.Dialog className="sm:max-w-[400px]  bg-gradient-to-r from-[#4EA618] to-[#192425] text-white border border-zinc-800">
+            <AlertDialog.Dialog className="sm:max-w-[400px]  bg-gradient-to-r from-[#071E22] to-[#0F3D3E] text-white border border-zinc-800">
               <AlertDialog.CloseTrigger />
               <AlertDialog.Header>
                 <AlertDialog.Icon status="danger" />

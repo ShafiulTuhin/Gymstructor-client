@@ -74,7 +74,7 @@ const GymHero = () => {
 
       {/* Content */}
       <div className="relative z-10 h-full flex items-center">
-        <div className="max-w-7xl mx-auto px-4 w-full">
+        <div className="container mx-auto px-4 w-full">
           <div className="max-w-3xl text-white">
             {/* Badge */}
             <motion.div
@@ -124,7 +124,7 @@ const GymHero = () => {
               <Link href={"/classes"}>
                 <Button
                   size="lg"
-                  className="bg-gradient-to-r from-[#15A1BF] to-emerald-500 text-white font-semibold px-8 rounded-lg"
+                  className="bg-[#4EA618] hover:bg-green-600 transition text-white font-semibold px-8 rounded-lg"
                 >
                   Explore Classes
                 </Button>
@@ -133,7 +133,7 @@ const GymHero = () => {
               <Button
                 size="lg"
                 variant="bordered"
-                className="border-white text-white font-semibold px-8"
+                className="border border-[#4EA618] text-white font-semibold px-8 rounded-lg"
               >
                 Join Membership
               </Button>
@@ -147,7 +147,7 @@ const GymHero = () => {
                   onClick={() => setCurrentSlide(index)}
                   className={`h-3 rounded-full transition-all duration-300 ${
                     currentSlide === index
-                      ? "w-10 bg-[#15A1BF]"
+                      ? "w-10 bg-[#4EA618]"
                       : "w-3 bg-white/50"
                   }`}
                 />

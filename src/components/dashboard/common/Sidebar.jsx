@@ -14,9 +14,10 @@ import {
 import { Button, Drawer } from "@heroui/react";
 import User from "./User";
 import Link from "next/link";
-import { GrFavorite } from "react-icons/gr";
+import { GrArticle, GrFavorite, GrTransaction } from "react-icons/gr";
 import { MdSettingsApplications } from "react-icons/md";
 import { FaChalkboardTeacher } from "react-icons/fa";
+import { GiReturnArrow } from "react-icons/gi";
 
 const Sidebar = async ({ user }) => {
   const navItems =
@@ -42,6 +43,11 @@ const Sidebar = async ({ user }) => {
             icon: GrFavorite,
             href: "/dashboard/user/favorite",
             label: "Favorite Classes",
+          },
+          {
+            icon: GiReturnArrow,
+            href: "/",
+            label: "Return Home",
           },
         ]
       : user?.role === "trainer"
@@ -71,6 +77,11 @@ const Sidebar = async ({ user }) => {
               href: "/dashboard/trainer/forums",
               label: "My Forum posts",
             },
+            {
+              icon: GiReturnArrow,
+              href: "/",
+              label: "Return Home",
+            },
           ]
         : [
             {
@@ -91,7 +102,7 @@ const Sidebar = async ({ user }) => {
             {
               icon: FaChalkboardTeacher,
               href: "/dashboard/admin/trainers",
-              label: "Trainers",
+              label: "Manage Trainers",
             },
 
             {
@@ -100,9 +111,24 @@ const Sidebar = async ({ user }) => {
               label: "Manage Classes",
             },
             {
-              icon: Gear,
-              href: "/dashboard/admin/settings",
-              label: "Settings",
+              icon: GrArticle,
+              href: "/dashboard/admin/forums",
+              label: "Manage Forums",
+            },
+            {
+              icon: PlusShape,
+              href: "/dashboard/admin/forums/new",
+              label: "Create Forum post",
+            },
+            {
+              icon: GrTransaction,
+              href: "/dashboard/admin/transactions",
+              label: "Transactions",
+            },
+            {
+              icon: GiReturnArrow,
+              href: "/",
+              label: "Return Home",
             },
           ];
   const navContent = (
@@ -126,18 +152,18 @@ const Sidebar = async ({ user }) => {
       </aside>
 
       <Drawer>
-        <Button variant="secondary" className="lg:hidden">
-          <LayoutSideContentLeft className="" />
+        <Button
+          variant="ghost"
+          className="lg:hidden py-2 px-4 mt-2 rounded-lg bg-gradient-to-r from-[#071E22] to-[#0F3D3E] text-white shadow-md hover:scale-105 active:scale-95 transition"
+        >
+          <LayoutSideContentLeft className="w-5 h-5" />
         </Button>
         <Drawer.Backdrop>
           <Drawer.Content placement="left">
-            <Drawer.Dialog className="bg-gradient-to-r from-[#4EA618] to-[#0F3D3E]">
+            <Drawer.Dialog className="bg-gradient-to-r from-[#071E22] to-[#0F3D3E]">
               <Drawer.CloseTrigger />
-              <Drawer.Header>
-                {/* <Drawer.Heading>Navigation</Drawer.Heading> */}
-              </Drawer.Header>
+              <Drawer.Header></Drawer.Header>
               <Drawer.Body>
-                {" "}
                 <User /> {navContent}
               </Drawer.Body>
             </Drawer.Dialog>

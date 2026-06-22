@@ -5,7 +5,6 @@ import React from "react";
 const AllClassesPage = async () => {
   const data = await getAllClasses();
   const classes = data.classes;
-  // console.log("Get all classes", classes);
 
   return (
     <div>

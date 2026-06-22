@@ -19,7 +19,7 @@ const Profile = ({ user }) => {
                 alt="profile"
                 width={110}
                 height={110}
-                className="rounded-full border-4 border-[#4EA618] object-cover"
+                className="rounded-full border-4 border-[#4EA618] object-cover w-[150px] h-[150px]"
               />
 
               {/* ROLE BADGE */}

@@ -14,7 +14,7 @@ export const createClass = async (newClassData) => {
   const data = await res.json();
   return data;
 };
-// Get all classes(Classes page, only show approved classes)
+
 export const getAllClasses = async () => {
   const res = await fetch(`${baseUrl}/api/classes?status=approved`);
   return res.json();
