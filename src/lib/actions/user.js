@@ -48,6 +48,7 @@ export const createPaymentAndBooking = async ({
       sessionId,
       userId,
       classId,
+      trainerId,
     }),
   });
 
@@ -65,7 +66,7 @@ export const updateTrainerApplication = async (id, payload) => {
   return res.json();
 };
 
-// Get payment and booking details for user
+// Get payment and booking details for user(own)
 export const getBookingDetails = async (userId) => {
   const res = await fetch(`${baseUrl}/api/bookings/${userId}`, {
     headers: { ...(await getHeader()) },
@@ -79,6 +80,22 @@ export const getAllBookings = async () => {
   });
   const bookings = await res.json();
   return bookings.data;
+};
+
+// Get all Bookings of trainer's classes by trainerId:
+export const getBookingsOfTrainerClasses = async (classIds) => {
+  const res = await fetch(`${baseUrl}/api/bookings/trainer-classes`, {
+    method: "POST", // POST so you can send array in body
+    cache: "no-store",
+    headers: {
+      "Content-Type": "application/json",
+      ...(await getHeader()),
+    },
+    body: JSON.stringify({ classIds }),
+  });
+
+  if (!res.ok) throw new Error(`Failed: ${res.status}`);
+  return res.json();
 };
 
 // Get all Users:
