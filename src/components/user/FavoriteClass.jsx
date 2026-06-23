@@ -2,9 +2,7 @@
 
 import FavoriteClassDetails from "./FavoriteClassDetails";
 
-const FavoriteClass = ({ favClasses = [] }) => {
-  console.log(favClasses);
-
+const FavoriteClass = ({ favClasses = [], user }) => {
   if (!favClasses.length) {
     return (
       <div className="flex min-h-[300px] items-center justify-center">
@@ -15,7 +13,7 @@ const FavoriteClass = ({ favClasses = [] }) => {
 
   return (
     <div className="min-h-screen bg-[#071E22] px-5 py-10">
-      <FavoriteClassDetails classes={favClasses} />
+      <FavoriteClassDetails classes={favClasses} user={user} />
     </div>
   );
 };

@@ -9,7 +9,7 @@ const FavoritePage = async () => {
 
   return (
     <div>
-      <FavoriteClass favClasses={favClasses} />
+      <FavoriteClass favClasses={favClasses} user={user} />
     </div>
   );
 };
