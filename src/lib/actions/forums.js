@@ -91,23 +91,26 @@ export const createComment = async (forumId, user, text) => {
 };
 // Edit comment
 export const editComment = async (forumId, commentId, userId, text) => {
-  const res = await fetch(`/api/forums/${forumId}/comments/${commentId}`, {
-    method: "PATCH",
-    headers: {
-      "Content-Type": "application/json",
+  const res = await fetch(
+    `${baseUrl}/api/forums/${forumId}/comments/${commentId}`,
+    {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        userId,
+        text,
+      }),
     },
-    body: JSON.stringify({
-      userId,
-      text,
-    }),
-  });
+  );
 
   return res.json();
 };
 // Delete comment
 export const deleteComment = async (forumId, commentId, userId) => {
   const res = await fetch(
-    `http://localhost:5000/api/forums/${forumId}/comments/${commentId}`,
+    `${baseUrl}/api/forums/${forumId}/comments/${commentId}`,
     {
       method: "DELETE",
       headers: {
