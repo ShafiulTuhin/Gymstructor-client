@@ -16,7 +16,7 @@ const DetailsClassPage = async ({ params }) => {
   const bookings = await getBookingDetails(user?.id);
 
   const myBookings = bookings.data || [];
-  console.log(myBookings);
+  // console.log(myBookings);
 
   const isBooked = myBookings.find(
     (b) => b.userId === user?.id && b.classId === myClass._id,

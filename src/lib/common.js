@@ -6,7 +6,7 @@ export const handleGoogleLogin = async () => {
       provider: "google",
     });
 
-    console.log(result);
+    // console.log(result);
   } catch (error) {
     console.error(error);
   }

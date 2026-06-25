@@ -6,7 +6,7 @@ import Link from "next/link";
 const MyBookingsClasses = async () => {
   const user = await getUserSession();
   const result = await getBookingDetails(user?.id);
-  console.log(result);
+  // console.log(result);
 
   const myBookings = result.data || [];
 

@@ -1,6 +1,6 @@
 import AllForums from "@/components/forumsAll/AllForums";
 import { getAllForums } from "@/lib/actions/forums";
-import { getUserSession } from "@/lib/core/session";
+
 import React from "react";
 
 const AllForumsPage = async () => {

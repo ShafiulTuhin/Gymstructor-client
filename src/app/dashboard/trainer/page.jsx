@@ -8,7 +8,7 @@ const TrainerHomepage = async () => {
   const classes = await getTrainerClasses(user.id);
   const classIds = classes.map((cls) => cls._id);
   const bookings = await getBookingsOfTrainerClasses(classIds);
-  console.log(bookings);
+  // console.log(bookings);
 
   const totalClasses = classes?.length || 0;
   const totalBookings = bookings?.length || 0;

@@ -19,7 +19,9 @@ export const createClass = async (newClassData) => {
 };
 
 export const getAllClasses = async () => {
-  const res = await fetch(`${baseUrl}/api/classes?status=approved`);
+  const res = await fetch(`${baseUrl}/api/classes?status=approved`, {
+    cache: "no-store",
+  });
   return res.json();
 };
 // Get admin classes

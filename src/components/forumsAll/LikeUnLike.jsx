@@ -23,7 +23,7 @@ export default function LikeUnlike({ user, forum }) {
       return;
     }
     const token = await getUserToken();
-    console.log(token);
+    // console.log(token);
 
     try {
       setLoading(true);

@@ -18,7 +18,7 @@ const AddToFavorite = ({ user, myClass }) => {
         { headers: { authorization: `Bearer ${token}` } },
       );
       const data = await res.json();
-      console.log(data);
+      // console.log(data);
 
       const exists = data.find((item) => item._id === myClass._id);
 
@@ -33,7 +33,7 @@ const AddToFavorite = ({ user, myClass }) => {
   // TOGGLE
   const toggleFavorite = async () => {
     const token = await getUserToken();
-    console.log(token);
+    // console.log(token);
 
     try {
       setLoading(true);

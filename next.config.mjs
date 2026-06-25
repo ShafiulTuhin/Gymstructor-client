@@ -1,6 +1,7 @@
 /** @type {import('next').Next} */
 const nextConfig = {
   output: "standalone",
+  // transpilePackages: ["@heroui/react", "@heroui/theme"],
   experimental: {
     serverComponentsExternalPackages: ["@better-auth/kysely-adapter", "kysely"],
   },

@@ -1,6 +1,6 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import Navbar from "@/components/shared/Navbar";
+
 import { ToastContainer } from "react-toastify";
 import Footer from "@/components/shared/Footer";
 
@@ -15,7 +15,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata = {
-  title: "Gymstructor",
+  title: "Gymstructor - Find you",
   description: "A platform of gym instructors",
 };
 
