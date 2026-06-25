@@ -20,7 +20,9 @@ export const createForum = async (newForumData) => {
 
 // Get all Forums
 export const getAllForums = async () => {
-  const res = await fetch(`${baseUrl}/api/forums`);
+  const res = await fetch(`${baseUrl}/api/forums`, {
+    cache: "no-store",
+  });
   return res.json();
 };
 // Get all forums for admin:

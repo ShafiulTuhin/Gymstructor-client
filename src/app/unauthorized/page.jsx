@@ -7,10 +7,10 @@ import { motion } from "framer-motion";
 
 const UnauthorizedPage = () => {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-black via-gray-900 to-[#0b1220] flex items-center justify-center px-4 overflow-hidden relative">
+    <div className="min-h-screen bg-[#0F3D3E]  flex items-center justify-center px-4 overflow-hidden relative">
       {/* Background Glow */}
-      <div className="absolute w-96 h-96 bg-cyan-500/10 blur-[140px] rounded-full -top-24 -left-20" />
-      <div className="absolute w-96 h-96 bg-blue-600/10 blur-[140px] rounded-full bottom-0 right-0" />
+      <div className="absolute -top-20 -right-20 w-64 h-64 bg-[#00C2FF]/20 blur-3xl rounded-full" />
+      <div className="absolute -bottom-20 -left-20 w-64 h-64 bg-[#4EA618]/20 blur-3xl rounded-full" />
 
       <motion.div
         initial={{ opacity: 0, y: 40 }}
@@ -47,26 +47,28 @@ const UnauthorizedPage = () => {
 
           {/* Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center mt-10">
-            <Link href={"/j"}>
+            <Link href={"/"}>
               <Button
                 color="primary"
                 size="lg"
                 startContent={<FiHome />}
-                className="font-semibold"
+                className="font-semibold bg-[#4EA618] hover:bg-green-600 transition rounded-lg"
               >
                 Back to Home
               </Button>
             </Link>
 
-            <Button
-              variant="bordered"
-              size="lg"
-              startContent={<FiArrowLeft />}
-              className="border-white/20 text-white hover:bg-white/10"
-              onPress={() => window.history.back()}
-            >
-              Go Back
-            </Button>
+            <Link href={"/classes"}>
+              {" "}
+              <Button
+                variant="bordered"
+                size="lg"
+                startContent={<FiArrowLeft />}
+                className="border-white/20 text-white hover:bg-white/10 rounded-lg"
+              >
+                Browse Classes
+              </Button>
+            </Link>
           </div>
         </div>
 
