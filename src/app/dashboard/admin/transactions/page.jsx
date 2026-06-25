@@ -1,6 +1,11 @@
 import { getAllPaymentHistory } from "@/lib/actions/user";
 import React from "react";
 
+export const metadata = {
+  title: "Gymstructor |Admin - Transactions",
+  description: "Get transactions of booking from users",
+};
+
 const TransactionPage = async () => {
   const transactions = await getAllPaymentHistory();
 

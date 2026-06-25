@@ -9,6 +9,15 @@ import Error from "./error";
 import { toast } from "react-toastify";
 import BookNowButton from "@/components/user/BookNowButton";
 
+export async function generateMetadata({ params }) {
+  const { id } = await params;
+  const myClass = await getSingleClass(id);
+  return {
+    title: `Gymstructor | Class-${myClass.className}`,
+    description: myClass.description,
+  };
+}
+
 const DetailsClassPage = async ({ params }) => {
   const { id } = await params;
   const myClass = await getSingleClass(id);

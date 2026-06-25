@@ -3,6 +3,10 @@ import { stripe } from "@/lib/stripe";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import { FaArrowRight, FaCheckCircle, FaDumbbell } from "react-icons/fa";
+export const metadata = {
+  title: "Gymstructor |Payment success",
+  description: "Success of payment and get booking data",
+};
 
 export default async function Success({ searchParams }) {
   const { session_id } = await searchParams;

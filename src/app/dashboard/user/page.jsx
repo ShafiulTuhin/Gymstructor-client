@@ -8,6 +8,11 @@ import {
 } from "@/lib/actions/user";
 import { getUserSession } from "@/lib/core/session";
 
+export const metadata = {
+  title: "Gymstructor | user Dashboard",
+  description: "User activities are listed here",
+};
+
 const UserHomePage = async () => {
   let user = null;
   let favClass = [];

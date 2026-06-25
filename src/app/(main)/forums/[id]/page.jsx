@@ -5,6 +5,15 @@ import { getSingleForum } from "@/lib/actions/forums";
 import { getUserSession } from "@/lib/core/session";
 import Error from "./error";
 
+export async function generateMetadata({ params }) {
+  const { id } = await params;
+  const forum = await getSingleForum(id);
+  return {
+    title: `Gymstructor | Forum-${forum.title}`,
+    description: forum.description,
+  };
+}
+
 const ForumDetailsPage = async ({ params }) => {
   const { id } = await params;
 

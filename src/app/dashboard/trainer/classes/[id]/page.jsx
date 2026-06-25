@@ -4,6 +4,15 @@ import { notFound } from "next/navigation"; // 1. Import notFound
 import React from "react";
 import Error from "./error";
 
+export async function generateMetadata({ params }) {
+  const { id } = await params;
+  const myClass = await getSingleClass(id);
+  return {
+    title: `Gymstructor | Class-${myClass.className}`,
+    description: myClass.description,
+  };
+}
+
 const ClassDetailsPage = async ({ params }) => {
   const { id } = await params;
   const myClass = await getSingleClass(id);

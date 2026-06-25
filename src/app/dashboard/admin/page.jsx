@@ -2,8 +2,11 @@ import Profile from "@/components/dashboard/Profile";
 import { getAdminClasses } from "@/lib/actions/classes";
 import { getAllBookings, getAllUser } from "@/lib/actions/user";
 import { getUserSession } from "@/lib/core/session";
-import { admin } from "better-auth/plugins";
 import { FaUsers, FaDumbbell, FaCalendarCheck } from "react-icons/fa";
+export const metadata = {
+  title: "Gymstructor | Admin Dashboard",
+  description: "Application management page",
+};
 
 const AdminHomepage = async () => {
   const user = await getUserSession();

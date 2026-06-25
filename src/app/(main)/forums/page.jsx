@@ -1,7 +1,10 @@
 import AllForums from "@/components/forumsAll/AllForums";
 import { getAllForums } from "@/lib/actions/forums";
 
-import React from "react";
+export const metadata = {
+  title: "Gymstructor | Community Forums",
+  description: "All articles that posted by author",
+};
 
 const AllForumsPage = async () => {
   const forums = await getAllForums();

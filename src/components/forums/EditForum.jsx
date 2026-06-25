@@ -87,12 +87,12 @@ const EditForum = ({ myForum, user }) => {
 
         <Modal.Backdrop>
           <Modal.Container placement="center">
-            <Modal.Dialog className="sm:max-w-2xl w-full max-h-[90vh] flex flex-col bg-gradient-to-r from-[#4EA618] to-[#192425] text-white rounded-2xl shadow-2xl">
+            <Modal.Dialog className="sm:max-w-2xl w-full max-h-[90vh] flex flex-col bg-gradient-to-r from-[#071E22] to-[#0F3D3E] text-white rounded-2xl shadow-2xl">
               <Modal.CloseTrigger />
 
               {/* HEADER */}
               <Modal.Header className="border-b border-gray-200 px-6 py-4">
-                <Modal.Heading className="text-lg font-bold">
+                <Modal.Heading className="text-lg font-bold text-gray-300">
                   Edit Forum Information
                 </Modal.Heading>
               </Modal.Header>
@@ -116,7 +116,7 @@ const EditForum = ({ myForum, user }) => {
                           <Input
                             name="authorName"
                             readOnly
-                            className="bg-gray-200 rounded-lg"
+                            className="bg-gray-500 rounded-lg"
                           />
                         </TextField>
                         <TextField name="className" defaultValue={title}>
@@ -125,7 +125,7 @@ const EditForum = ({ myForum, user }) => {
                           </Label>
                           <Input
                             name="title"
-                            className="bg-gray-200 rounded-lg"
+                            className="bg-gray-500 rounded-lg"
                           />
                         </TextField>
                       </div>
@@ -133,7 +133,7 @@ const EditForum = ({ myForum, user }) => {
                     <input
                       type="file"
                       onChange={handleImageUpload}
-                      className="w-full p-2 bg-gray-200 rounded"
+                      className="w-full p-2 bg-gray-500 rounded"
                     />
 
                     {previewUrl && (
@@ -158,7 +158,7 @@ const EditForum = ({ myForum, user }) => {
                           name="description"
                           defaultValue={description}
                           rows={4}
-                          className="bg-gray-200 rounded-lg w-full"
+                          className="bg-gray-500 rounded-lg w-full"
                         />
                       </div>
                     </Fieldset>
@@ -180,7 +180,7 @@ const EditForum = ({ myForum, user }) => {
                 <Button
                   type="submit"
                   form="edit-forum-form"
-                  className="bg-gradient-to-r from-[#4EA618] to-[#192425] text-white rounded-lg px-5"
+                  className="cursor-pointer  text-white rounded-lg px-5  bg-[#4EA618] hover:bg-green-600 transition"
                   slot="close"
                 >
                   Update Forum

@@ -2,6 +2,10 @@ import Profile from "@/components/dashboard/Profile";
 import { getTrainerClasses } from "@/lib/actions/classes";
 import { getBookingsOfTrainerClasses } from "@/lib/actions/user";
 import { getUserSession } from "@/lib/core/session";
+export const metadata = {
+  title: "Gymstructor | Trainer Dashboard",
+  description: "Trainer can create classes and forums",
+};
 
 const TrainerHomepage = async () => {
   const user = await getUserSession();
