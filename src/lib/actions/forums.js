@@ -41,7 +41,9 @@ export const getAuthorForums = async (authorId) => {
 
 // Get Single forum details
 export const getSingleForum = async (id) => {
-  const res = await fetch(`${baseUrl}/api/forums/single/${id}`);
+  const res = await fetch(`${baseUrl}/api/forums/single/${id}`, {
+    headers: { ...(await getHeader()) },
+  });
   const myForum = await res.json();
   return myForum;
 };
@@ -76,7 +78,7 @@ export const createComment = async (forumId, user, text) => {
   try {
     const res = await fetch(`${baseUrl}/api/forums/${forumId}/comments`, {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: { "Content-Type": "application/json", ...(await getHeader()) },
       body: JSON.stringify({
         userId: user.id,
         userName: user.name,
@@ -97,6 +99,7 @@ export const editComment = async (forumId, commentId, userId, text) => {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
+        ...(await getHeader()),
       },
       body: JSON.stringify({
         userId,
@@ -115,6 +118,7 @@ export const deleteComment = async (forumId, commentId, userId) => {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
+        ...(await getHeader()),
       },
       body: JSON.stringify({
         userId,

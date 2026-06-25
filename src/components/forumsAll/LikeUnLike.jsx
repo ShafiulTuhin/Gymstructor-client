@@ -1,5 +1,6 @@
 "use client";
 
+import { getUserToken } from "@/lib/core/token-client";
 import { Button } from "@heroui/react";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
@@ -17,6 +18,13 @@ export default function LikeUnlike({ user, forum }) {
   }, [key]);
 
   const handleVote = async (type) => {
+    if (user?.status === "blocked") {
+      toast.error("Action restricted by Admin");
+      return;
+    }
+    const token = await getUserToken();
+    console.log(token);
+
     try {
       setLoading(true);
 
@@ -24,7 +32,10 @@ export default function LikeUnlike({ user, forum }) {
         `${process.env.NEXT_PUBLIC_BASE_URL}/api/forums/vote`,
         {
           method: "POST",
-          headers: { "Content-Type": "application/json" },
+          headers: {
+            "Content-Type": "application/json",
+            authorization: `Bearer ${token}`,
+          },
           body: JSON.stringify({
             userId: user.id, // ✅ FIXED
             forumId: forum._id,

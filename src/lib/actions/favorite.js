@@ -1,6 +1,8 @@
 "use server";
 
 import { getHeader } from "../core/server";
+import { getUserSession } from "../core/session";
+import { getSingleClass } from "./classes";
 
 const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
 export const getMyFavoriteClass = async (userId) => {
@@ -10,7 +12,26 @@ export const getMyFavoriteClass = async (userId) => {
   return res.json();
 };
 
-// Delte favorite
+// Toggle favorite:
+export const toggleFavoriteFn = async (classId) => {
+  const user = getUserSession();
+  // const myClass = getSingleClass();
+  await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/favorites/toggle`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      ...(await getHeader()),
+    },
+    body: JSON.stringify({
+      userId: user.id,
+      classId,
+    }),
+  });
+
+  return await res.json();
+};
+
+// Delete favorite
 export const removeFavorite = async (userId, classId) => {
   if (!userId || !classId) {
     throw new Error("Missing required parameters: userId and classId.");

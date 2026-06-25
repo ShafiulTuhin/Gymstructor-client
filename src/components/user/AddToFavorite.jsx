@@ -1,5 +1,6 @@
 "use client";
 
+import { getUserToken } from "@/lib/core/token-client";
 import { Button } from "@heroui/react";
 import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
@@ -11,10 +12,13 @@ const AddToFavorite = ({ user, myClass }) => {
   // ✅ CHECK ON LOAD
   useEffect(() => {
     const checkFavorite = async () => {
+      const token = await getUserToken();
       const res = await fetch(
         `${process.env.NEXT_PUBLIC_BASE_URL}/api/favorites/${user.id}`,
+        { headers: { authorization: `Bearer ${token}` } },
       );
       const data = await res.json();
+      console.log(data);
 
       const exists = data.find((item) => item._id === myClass._id);
 
@@ -28,6 +32,9 @@ const AddToFavorite = ({ user, myClass }) => {
 
   // TOGGLE
   const toggleFavorite = async () => {
+    const token = await getUserToken();
+    console.log(token);
+
     try {
       setLoading(true);
 
@@ -37,6 +44,7 @@ const AddToFavorite = ({ user, myClass }) => {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
+            authorization: `Bearer ${token}`,
           },
           body: JSON.stringify({
             userId: user.id,
@@ -47,7 +55,11 @@ const AddToFavorite = ({ user, myClass }) => {
 
       const data = await res.json();
       setIsFavorite(data.favorite);
-      toast.success("Successfully added to your favorites!");
+      if (data.favorite) {
+        toast.success("Added to favorites!");
+      } else {
+        toast.success("Removed from favorites!");
+      }
     } catch (err) {
       console.log(err);
     } finally {

@@ -2,8 +2,10 @@
 import {
   createComment,
   deleteComment,
-  // editComment,
+  editComment,
 } from "@/lib/actions/forums";
+
+import { getUserToken } from "@/lib/core/token-client";
 import Image from "next/image";
 import React, { useState } from "react";
 import { FaCalendarAlt, FaUserCircle } from "react-icons/fa";
@@ -46,18 +48,23 @@ const ForumDetails = ({ forum, user }) => {
       toast.error("Something went wrong");
     }
   };
-  const editComment = async (forumId, commentId, userId, text) => {
-    const res = await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_URL}/api/forums/${forumId}/comments/${commentId}`,
-      {
-        method: "PATCH",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ userId, text }),
-      },
-    );
+  // const editComment = async (forumId, commentId, userId, text) => {
+  //   const token = await getUserToken();
+  //   const res = await fetch(
+  //     `${process.env.NEXT_PUBLIC_BASE_URL}/api/forums/${forumId}/comments/${commentId}`,
+  //     {
+  //       method: "PATCH",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //         authorization: `Bearer ${token}`,
+  //       },
 
-    return res.json(); // ✅ IMPORTANT
-  };
+  //       body: JSON.stringify({ userId, text }),
+  //     },
+  //   );
+
+  //   return res.json(); // ✅ IMPORTANT
+  // };
   const handleEdit = async (commentId) => {
     if (!editText.trim()) return;
 
@@ -151,24 +158,6 @@ const ForumDetails = ({ forum, user }) => {
 
                 {/* Previous Comments (UI only) */}
                 <div className="mt-6 space-y-3">
-                  {/* {forumData?.comments?.length > 0 ? (
-                    [...forumData.comments]
-                      .reverse()
-                      .slice(0, 3)
-                      .map((c) => (
-                        <div
-                          key={c._id}
-                          className="bg-[#0F3D3E] p-3 rounded-lg border border-white/10"
-                        >
-                          <p className="text-white text-sm">{c.text}</p>
-                          <span className="text-xs text-gray-400">
-                            by {c.userName}
-                          </span>
-                        </div>
-                      ))
-                  ) : (
-                    <p className="text-gray-400 text-sm">No comments yet</p>
-                  )} */}
                   {forumData?.comments?.length > 0 ? (
                     [...forumData.comments]
                       .slice()
