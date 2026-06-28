@@ -37,6 +37,7 @@ export const createPaymentAndBooking = async ({
   sessionId,
   userId,
   classId,
+  trainerId,
 }) => {
   const res = await fetch(`${baseUrl}/api/payment`, {
     method: "POST",
@@ -49,6 +50,7 @@ export const createPaymentAndBooking = async ({
       userId,
       classId,
       trainerId,
+      schedule: JSON.stringify(schedule),
     }),
   });
 

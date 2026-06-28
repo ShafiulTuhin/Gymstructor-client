@@ -1,7 +1,7 @@
 "use client";
 
 import { updateClass } from "@/lib/actions/classes";
-import { updateTrainerApplication } from "@/lib/actions/user";
+import { updateTrainerApplication, updateUserRole } from "@/lib/actions/user";
 
 import { Button, Label, Modal, TextArea } from "@heroui/react";
 import { useRouter } from "next/navigation";
@@ -9,7 +9,8 @@ import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
 
 const TrainerApprovalModal = ({ application }) => {
-  const { _id, applicantName, specialty, experience, status } = application;
+  const { _id, applicantId, applicantName, specialty, experience, status } =
+    application;
 
   const router = useRouter();
 
@@ -22,6 +23,9 @@ const TrainerApprovalModal = ({ application }) => {
     const res = await updateTrainerApplication(_id, updatedData);
 
     if (res.modifiedCount > 0) {
+      if (updatedData.status === "approved") {
+        await updateUserRole(applicantId, "trainer");
+      }
       toast.success("Application updated successfully");
     } else {
       toast.error("No changes made");

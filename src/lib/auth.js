@@ -16,9 +16,6 @@ export const auth = betterAuth({
         type: "string",
         defaultValue: "user",
       },
-      //   plan: {
-      //     default: "user",
-      //   },
       status: { type: "string", defaultValue: "active" },
     },
   },

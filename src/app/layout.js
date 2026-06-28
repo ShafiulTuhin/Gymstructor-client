@@ -15,7 +15,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata = {
-  title: "Gymstructor | Find you more stronger",
+  title: "Gymstructor | Fitness Classes Booking & Management Platform",
   description: "A platform of gym instructors",
 };
 

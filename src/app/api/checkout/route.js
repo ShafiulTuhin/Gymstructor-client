@@ -30,6 +30,7 @@ export async function POST(req) {
         userName: user?.name,
         classId: myClass._id?.toString(),
         className: myClass?.className,
+        schedule: JSON.stringify(myClass?.schedule),
         trainerId: myClass?.trainerId,
         trainerName: myClass?.trainerName,
         price: Number(myClass.price),
@@ -51,6 +52,7 @@ export async function POST(req) {
       success_url: `${origin}/payment/success?session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${origin}/cancel`,
     });
+    // console.log(session.metadata);
     return NextResponse.json({ url: session.url });
   } catch (err) {
     return NextResponse.json(

@@ -1,5 +1,6 @@
 import PendingApplicantList from "@/components/dashboard/admin/PendingApplicantList";
 import { getAllTrainerApplication } from "@/lib/actions/user";
+import { getUserSession } from "@/lib/core/session";
 import React from "react";
 
 export const metadata = {
@@ -8,6 +9,7 @@ export const metadata = {
 };
 
 const TrainerApplicationPage = async () => {
+  const user = await getUserSession();
   const applications = await getAllTrainerApplication();
   const pendingApplication = applications.filter(
     (app) => app.status === "pending",
